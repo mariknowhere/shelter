@@ -1,0 +1,92 @@
+.about {
+  position: relative;
+  background: #EFECE5;
+  height: 1080px;
+
+  &-image {
+    &_first {
+      position: absolute;
+      right: 140px;
+      top: 0;
+    }
+
+    &_second {
+      position: absolute;
+      bottom: 45px;
+      left: 250px;
+    }
+  }
+
+  &-content {
+    display: flex;
+    flex-direction: row;
+    gap: 75px;
+    position: relative;
+    z-index: 1;
+
+    padding: 154px 60px 0;
+  }
+
+  &-left-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    width: 40%;
+  }
+
+  &-right-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    width: 50%;
+  }
+
+  &-text {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  &-title {
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 130%;
+    text-transform: uppercase;
+
+    color: #262626;
+
+    &_main {
+      font-family: 'Vipnagorgialla', sans-serif;
+      font-weight: 700;
+      font-size: 180px;
+      line-height: 100%;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+
+      color: #262626;
+    }
+  }
+
+  &-paragraph {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 130%;
+
+    color: #262626;
+  }
+
+  &-button {
+    width: fit-content;
+    padding: 23px 72px;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 130%;
+    text-align: center;
+    text-transform: uppercase;
+
+    color: #FFFFFF;
+
+    background: #177378;
+    border-radius: 130px;
+  }
+}

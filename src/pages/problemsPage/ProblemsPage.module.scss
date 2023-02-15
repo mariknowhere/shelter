@@ -1,0 +1,69 @@
+.problems {
+  position: relative;
+  background: #fff url(../../../public/assets/images/problems_background.png) 0 0 no-repeat;
+  height: 1080px;
+
+  &-image {
+    &_second {
+      position: absolute;
+      bottom: 0;
+      left: 90px;
+    }
+  }
+
+  &-title {
+    position: absolute;
+    top: 80px;
+    left: 10%;
+    z-index: 1;
+
+    font-family: 'Vipnagorgialla', sans-serif;
+    font-weight: 700;
+    font-size: 150px;
+    line-height: 100%;
+    text-align: center;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+
+    color: #FFFFFF;
+  }
+
+  &-block {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+
+    position: absolute;
+    right: 60px;
+    top: 155px;
+
+    &-image {
+      width: fit-content;
+      height: fit-content;
+    }
+
+    &-text {
+      display: flex;
+      flex-direction: column;
+      width: 95%;
+      gap: 20px;
+    }
+
+    &-title {
+      font-weight: 700;
+      font-size: 30px;
+      line-height: 130%;
+      text-transform: uppercase;
+
+      color: #FFFFFF;
+    }
+
+    &-description {
+      font-weight: 500;
+      font-size: 25px;
+      line-height: 130%;
+
+      color: #FFFFFF;
+    }
+  }
+}
