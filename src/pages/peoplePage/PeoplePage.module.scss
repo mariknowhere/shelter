@@ -1,0 +1,23 @@
+.people {
+  position: relative;
+  background: #EBEBEB;
+  height: 1080px;
+
+  &-text {
+    padding: 60px 0 0 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &-title {
+    font-family: 'Vipnagorgialla', sans-serif;
+    font-weight: 400;
+    font-size: 120px;
+    line-height: 100%;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+
+    color: #262626;
+  }
+}
