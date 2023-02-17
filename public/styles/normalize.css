@@ -72,6 +72,8 @@ h1, h2, h3, h4, h5, h6 {
 
 body {
   font-family: 'Manrope', Inter, sans-serif;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 textarea {
@@ -88,7 +90,7 @@ input::-webkit-calendar-picker-indicator {
 }
 
 *::-webkit-scrollbar {
-  width: 6px;
+  width: 0;
   height: 6px;
 }
 
