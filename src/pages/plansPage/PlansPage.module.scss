@@ -1,0 +1,140 @@
+.plans {
+  position: relative;
+  background: #fff url(../../../public/assets/images/plans_background.png) 0 0 no-repeat;
+  height: 1080px;
+
+  &-content {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+    padding: 80px 60px 0;
+  }
+
+  &-header {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    &-title {
+      font-family: 'Vipnagorgialla', sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 130px;
+      line-height: 100%;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+
+      color: #262626;
+    }
+
+    &-topic {
+      font-family: 'Vipnagorgialla', sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 40px;
+      line-height: 100%;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+
+      color: #262626;
+    }
+
+    &-description {
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 130%;
+
+      color: #262626;
+    }
+  }
+
+  &-block {
+    display: flex;
+    flex-direction: row;
+    gap: 142px;
+
+    &-item {
+      display: flex;
+      flex-direction: column;
+      gap: 42px;
+
+      &-title {
+        position: relative;
+        font-family: 'Vipnagorgialla', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 30px;
+        line-height: 100%;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+
+        &_green {
+          color: #00AC7C;
+
+          &::before {
+            content: "";
+            display: block;
+
+            position: absolute;
+            bottom: -10px;
+            left: -60px;
+            background: #00AC7C;
+            width: 110%;
+            height: 2px;
+          }
+        }
+
+        &_red {
+          color: #DC1D03;
+
+          &::before {
+            content: "";
+            display: block;
+
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            background: #DC1D03;
+            width: 110%;
+            height: 2px;
+          }
+        }
+      }
+
+      &-list {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+
+        &-item {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+
+          &-images {
+            display: flex;
+            flex-direction: row;
+            gap: 15px;
+          }
+
+          &-title {
+            font-weight: 800;
+            font-size: 20px;
+            line-height: 130%;
+            text-transform: uppercase;
+
+            color: #262626;
+          }
+
+          &-description {
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 130%;
+
+            color: #262626;
+          }
+        }
+      }
+    }
+  }
+}

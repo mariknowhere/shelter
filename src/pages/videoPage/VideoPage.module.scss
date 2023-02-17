@@ -1,0 +1,32 @@
+.video {
+  position: relative;
+  background: #fff url(../../../public/assets/images/video_background.png) 0 0 no-repeat;
+  height: 1080px;
+
+  &-planets {
+    position: absolute;
+    right: 0;
+    bottom: 90px;
+  }
+
+  &-item {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+  }
+
+  &-circle {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+  }
+
+  &-lines {
+    position: absolute;
+    top: 18px;
+    right: 30px;
+  }
+}

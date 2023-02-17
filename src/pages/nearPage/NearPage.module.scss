@@ -1,0 +1,102 @@
+.near {
+  position: relative;
+  background: #fff url(../../../public/assets/images/near_background.png) 0 0 no-repeat;
+  height: 1080px;
+
+  &-content {
+    display: flex;
+    flex-direction: column;
+    width: 200%;
+    gap: 96px;
+    padding: 160px 60px 0;
+  }
+
+  &-top {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    &-text {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: relative;
+    }
+
+    &-image {
+      position: absolute;
+      top: 25px;
+      right: 152px;
+    }
+
+    &-title {
+      font-family: 'Vipnagorgialla', sans-serif;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 150px;
+      line-height: 100%;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+
+      color: #FFFFFF;
+    }
+
+    &-topic {
+      font-weight: 700;
+      font-size: 50px;
+      line-height: 130%;
+      text-transform: uppercase;
+
+      color: #FFFFFF;
+    }
+
+    &-paragraphs {
+      max-width: 50%;
+    }
+
+    &-paragraph {
+      font-weight: 500;
+      font-size: 25px;
+      line-height: 130%;
+
+      color: #EBEBEB;
+    }
+  }
+
+  &-bottom {
+    display: flex;
+    flex-direction: row;
+    gap: 205px;
+
+    &-item {
+      display: flex;
+      flex-direction: column;
+      max-width: 437px;
+
+      &-images {
+        display: flex;
+        flex-direction: row;
+        gap: 40px;
+      }
+
+      &-title {
+        font-weight: 800;
+        font-size: 50px;
+        line-height: 130%;
+        text-transform: uppercase;
+
+        color: #EBEBEB;
+        margin: 20px 0 40px;
+      }
+
+      &-paragraph {
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 130%;
+
+        color: #EBEBEB;
+      }
+    }
+  }
+}
