@@ -108,3 +108,30 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
+
+.magic-text span {
+  opacity: 0;
+  transform: translateY(3px);
+  transition: all 0.8s ease-out;
+}
+
+.is-visible {
+   opacity: 1 !important;
+   transform: translateY(0) !important;
+ }
+
+.swiper-pagination {
+  position: fixed !important;
+}
+
+.router-swiper-wrapper {
+  height: 100vh !important;
+}
+
+.router-swiper-slide {
+  height: 100vh !important;
+}
+
+.active {
+  opacity: 1 !important;
+}

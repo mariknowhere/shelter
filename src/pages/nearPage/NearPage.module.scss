@@ -1,14 +1,14 @@
 .near {
   position: relative;
   background: #fff url(../../../public/assets/images/near_background.png) 0 0 no-repeat;
-  height: 1080px;
+  height: 100vh;
 
   &-content {
     display: flex;
     flex-direction: column;
     width: 200%;
     gap: 96px;
-    padding: 160px 60px 0;
+    padding: 120px 60px 0;
   }
 
   &-top {

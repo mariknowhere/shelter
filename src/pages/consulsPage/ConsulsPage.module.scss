@@ -1,7 +1,7 @@
 .consuls {
   position: relative;
   background: #fff url(../../../public/assets/images/consuls_background.png) 0 0 no-repeat;
-  height: 1080px;
+  height: 100vh;
 
   &-globus {
     position: absolute;
@@ -14,7 +14,7 @@
     display: flex;
     flex-direction: column;
     gap: 60px;
-    padding: 80px 0 0 60px;
+    padding: 20px 0 0 60px;
     width: 70%;
   }
 

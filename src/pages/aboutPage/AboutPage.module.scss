@@ -1,16 +1,22 @@
+@import "src/styles/mixins/animate";
+
 .about {
   position: relative;
   background: #EFECE5;
-  height: 1080px;
+  height: 100vh;
 
   &-image {
     &_first {
+      @include animateElement();
+
       position: absolute;
       right: 140px;
       top: 0;
     }
 
     &_second {
+      @include animateElement();
+
       position: absolute;
       bottom: 45px;
       left: 250px;
@@ -24,7 +30,7 @@
     position: relative;
     z-index: 1;
 
-    padding: 154px 60px 0;
+    padding: 110px 60px 0;
   }
 
   &-left-panel {
@@ -42,6 +48,8 @@
   }
 
   &-text {
+    @include animateElement();
+
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -76,6 +84,8 @@
   }
 
   &-button {
+    @include animateElement();
+    
     width: fit-content;
     padding: 23px 72px;
     font-weight: 500;
@@ -85,7 +95,6 @@
     text-transform: uppercase;
 
     color: #FFFFFF;
-
     background: #177378;
     border-radius: 130px;
   }

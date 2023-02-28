@@ -44,16 +44,16 @@ const TeamPage: FC = () => {
         </div>
         <div className={styles['team-links-wrapper']}>
           <div className={styles['team-links']}>
-            <a href="" className={styles['team-links-item']}>
+            <a href="/#" className={styles['team-links-item']}>
               Vkontakte
             </a>
-            <a href="" className={styles['team-links-item']}>
+            <a href="/#" className={styles['team-links-item']}>
               instagram
             </a>
-            <a href="" className={styles['team-links-item']}>
+            <a href="/#" className={styles['team-links-item']}>
               twitter
             </a>
-            <a href="" className={styles['team-links-item']}>
+            <a href="/#" className={styles['team-links-item']}>
               facebook
             </a>
           </div>

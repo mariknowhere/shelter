@@ -1,40 +1,92 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './MainPage.module.scss';
+import classNames from "classnames";
+import {splitText} from "../../utils/splitText";
+import {animateText} from "../../utils/animateText";
 
 const MainPage = () => {
+  const [isTitleVisible, setTitleVisible]= useState(false);
+  const [isTopicVisible, setTopicVisible]= useState(false);
+  const [isNotationVisible, setNotationVisible]= useState(false);
+  const [isArrowsVisible, setArrowsVisible]= useState(false);
+  const [isDonationsVisible, setDonationsVisible]= useState(false);
+  const [isPurpleBlockVisible, setPurpleBlockVisible]= useState(false);
+
+  useEffect(() => {
+    if (!isTitleVisible) {
+      splitText('data-main-title');
+      animateText('data-main-title');
+
+      setTitleVisible(true);
+    }
+
+    if (isTitleVisible) {
+      setTimeout(() => {
+        setPurpleBlockVisible(true);
+      }, 1500);
+    }
+
+    if (isTitleVisible) {
+      setTimeout(() => {
+        setTopicVisible(true);
+      }, 3000);
+    }
+    
+    if (isTopicVisible) {
+      setTimeout(() => {
+        setNotationVisible(true);
+      }, 1500);
+    }
+
+    if (isNotationVisible) {
+      setTimeout(() => {
+        setArrowsVisible(true);
+      }, 1500);
+    }
+
+    if (isArrowsVisible) {
+      setTimeout(() => {
+        setDonationsVisible(true);
+      }, 1500);
+    }
+
+  }, [isArrowsVisible, isNotationVisible, isTitleVisible, isTopicVisible]);
+
   return (
     <div className={styles['main']}>
       <div className={styles['main-navbar-wrapper']}>
         <div className={styles['main-navbar-circle']} />
         <ul className={styles['main-navbar']}>
           <li className={styles['main-navbar-item']}>
-            <img src="/assets/icons/light_black.svg" alt="О проекте" className={styles['main-navbar-item-image']}/>
-            <a className={styles['main-navbar-item-text']}>О проекте</a>
+            <img src="/assets/icons/light_black.svg" alt="О проекте" />
+            <a href="/#" className={styles['main-navbar-item-text']}>О проекте</a>
           </li>
           <li className={styles['main-navbar-item']}>
-            <a className={styles['main-navbar-item-text']}>Медиа</a>
+            <a href="/#" className={styles['main-navbar-item-text']}>Медиа</a>
           </li>
           <li className={styles['main-navbar-item']}>
-            <a className={styles['main-navbar-item-text']}>Проблематика</a>
+            <a href="/#" className={styles['main-navbar-item-text']}>Проблематика</a>
           </li>
           <li className={styles['main-navbar-item']}>
-            <a className={styles['main-navbar-item-text']}>Решение</a>
+            <a href="/#" className={styles['main-navbar-item-text']}>Решение</a>
           </li>
           <li className={styles['main-navbar-item']}>
-            <a className={styles['main-navbar-item-text']}>Roadmap</a>
+            <a href="/#" className={styles['main-navbar-item-text']}>Roadmap</a>
           </li>
           <li className={styles['main-navbar-item']}>
-            <a className={styles['main-navbar-item-text']}>Команда</a>
+            <a href="/#" className={styles['main-navbar-item-text']}>Команда</a>
           </li>
           <li className={styles['main-navbar-item']}>
-            <a className={styles['main-navbar-item-text']}>Контакты</a>
+            <a href="/#" className={styles['main-navbar-item-text']}>Контакты</a>
           </li>
         </ul>
       </div>
       <div className={styles['main-text']}>
-        <h1 className={styles['main-title']}>!Shelter</h1>
-        <h2 className={styles['main-topic']}>уникальный благотворительный<br /> проект</h2>
-        <div className={styles['main-donations-wrapper']}>
+        <h1 data-main-title className={classNames(styles['main-title'], 'magic-text')}>!Shelter</h1>
+        <h2 className={classNames(styles['main-topic'], {[styles['main_active']]: isTopicVisible})}>
+          уникальный благотворительный<br /> проект
+        </h2>
+        <div className={classNames(styles['main-donations-wrapper'], { [styles['main_active']]: isDonationsVisible })}>
           <div className={styles['main-donations']}>
             <div className={styles['main-donations-top']}>
               <img src="/assets/icons/light_white.svg" alt="Донаты" className={styles['main-donations-image']} />
@@ -48,30 +100,34 @@ const MainPage = () => {
         </div>
       </div>
       <div className={styles['main-list-wrapper']}>
-        <div className={styles['main-list-block']}/>
+        <div className={classNames(styles['main-list-block'], { [styles['main_active']]: isPurpleBlockVisible })}/>
         <div className={styles['main-list']}>
           <div className={styles['main-list-item']}>
-            <img src="/assets/icons/light_black.svg" alt="Вместе мы сможем помочь" className={styles['main-list-item-image']} />
+            <img src="/assets/icons/light_black.svg" alt="Вместе мы сможем помочь" />
             <span className={styles['main-list-item-text']}>Вместе мы сможем помочь</span>
           </div>
           <div className={styles['main-list-item']}>
-            <img src="/assets/icons/light_black.svg" alt="Вместе мы сможем помочь" className={styles['main-list-item-image']} />
+            <img src="/assets/icons/light_black.svg" alt="Вместе мы сможем помочь" />
             <span className={styles['main-list-item-text']}>Вместе мы сможем помочь</span>
           </div>
           <div className={styles['main-list-item']}>
-            <img src="/assets/icons/light_black.svg" alt="Вместе мы сможем помочь" className={styles['main-list-item-image']} />
+            <img src="/assets/icons/light_black.svg" alt="Вместе мы сможем помочь" />
             <span className={styles['main-list-item-text']}>Вместе мы сможем помочь</span>
           </div>
           <div className={styles['main-list-item']}>
-            <img src="/assets/icons/light_black.svg" alt="Вместе мы сможем помочь" className={styles['main-list-item-image']} />
+            <img src="/assets/icons/light_black.svg" alt="Вместе мы сможем помочь" />
             <span className={styles['main-list-item-text']}>Вместе мы сможем помочь</span>
           </div>
         </div>
       </div>
       <div className={styles['main-notation-wrapper']}>
-        <img src="/assets/icons/arrows.svg" alt="Стрелки" className={styles['main-notation-dots']} />
-        <div className={styles['main-notation']}>
-          <img src="/assets/icons/dots.svg" alt="Кавычки" className={styles['main-notation-image']} />
+        <img
+            src="/assets/icons/arrows.svg"
+            alt="Стрелки"
+            className={classNames(styles['main-notation-dots'], {[styles['main_active']]: isArrowsVisible})}
+        />
+        <div className={classNames(styles['main-notation'], {[styles['main_active']]: isNotationVisible})}>
+          <img src="/assets/icons/dots.svg" alt="Кавычки" />
           <span className={styles['main-notation-text']}>
             Благотворительный проект помощи животным на основе<br /> блокчейн и DAO технологии.
           </span>

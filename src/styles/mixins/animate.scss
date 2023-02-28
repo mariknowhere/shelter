@@ -1,0 +1,4 @@
+@mixin animateElement() {
+  opacity: 0;
+  transition: 1s all linear;
+}
