@@ -1,8 +1,7 @@
 import $ from "jquery";
 
-export const animateText = (dataInfo: string) => {
-    let context = $(`[${dataInfo}]`),
-        delay = 5000;
+export const animateText = (dataInfo: string, delay: number) => {
+    let context = $(`[${dataInfo}]`);
 
     context.children().each(function (index, letter) {
         setTimeout(function () {

@@ -15,7 +15,7 @@ const MainPage = () => {
   useEffect(() => {
     if (!isTitleVisible) {
       splitText('data-main-title');
-      animateText('data-main-title');
+      animateText('data-main-title', 4000);
 
       setTitleVisible(true);
     }
@@ -102,6 +102,46 @@ const MainPage = () => {
       <div className={styles['main-list-wrapper']}>
         <div className={classNames(styles['main-list-block'], { [styles['main_active']]: isPurpleBlockVisible })}/>
         <div className={styles['main-list']}>
+          <div className={styles['main-list-item']}>
+            <img src="/assets/icons/light_black.svg" alt="Вместе мы сможем помочь" />
+            <span className={styles['main-list-item-text']}>Вместе мы сможем помочь</span>
+          </div>
+          <div className={styles['main-list-item']}>
+            <img src="/assets/icons/light_black.svg" alt="Вместе мы сможем помочь" />
+            <span className={styles['main-list-item-text']}>Вместе мы сможем помочь</span>
+          </div>
+          <div className={styles['main-list-item']}>
+            <img src="/assets/icons/light_black.svg" alt="Вместе мы сможем помочь" />
+            <span className={styles['main-list-item-text']}>Вместе мы сможем помочь</span>
+          </div>
+          <div className={styles['main-list-item']}>
+            <img src="/assets/icons/light_black.svg" alt="Вместе мы сможем помочь" />
+            <span className={styles['main-list-item-text']}>Вместе мы сможем помочь</span>
+          </div>
+          <div className={styles['main-list-item']}>
+            <img src="/assets/icons/light_black.svg" alt="Вместе мы сможем помочь" />
+            <span className={styles['main-list-item-text']}>Вместе мы сможем помочь</span>
+          </div>
+          <div className={styles['main-list-item']}>
+            <img src="/assets/icons/light_black.svg" alt="Вместе мы сможем помочь" />
+            <span className={styles['main-list-item-text']}>Вместе мы сможем помочь</span>
+          </div>
+          <div className={styles['main-list-item']}>
+            <img src="/assets/icons/light_black.svg" alt="Вместе мы сможем помочь" />
+            <span className={styles['main-list-item-text']}>Вместе мы сможем помочь</span>
+          </div>
+          <div className={styles['main-list-item']}>
+            <img src="/assets/icons/light_black.svg" alt="Вместе мы сможем помочь" />
+            <span className={styles['main-list-item-text']}>Вместе мы сможем помочь</span>
+          </div>
+          <div className={styles['main-list-item']}>
+            <img src="/assets/icons/light_black.svg" alt="Вместе мы сможем помочь" />
+            <span className={styles['main-list-item-text']}>Вместе мы сможем помочь</span>
+          </div>
+          <div className={styles['main-list-item']}>
+            <img src="/assets/icons/light_black.svg" alt="Вместе мы сможем помочь" />
+            <span className={styles['main-list-item-text']}>Вместе мы сможем помочь</span>
+          </div>
           <div className={styles['main-list-item']}>
             <img src="/assets/icons/light_black.svg" alt="Вместе мы сможем помочь" />
             <span className={styles['main-list-item-text']}>Вместе мы сможем помочь</span>

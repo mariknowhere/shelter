@@ -13,7 +13,7 @@ const AboutPage: FC = () => {
   useEffect(() => {
     if (!isTitleVisible) {
       splitText('data-about-title');
-      animateText('data-about-title');
+      animateText('data-about-title', 2000);
 
       setTitleVisible(true);
     }
@@ -21,7 +21,7 @@ const AboutPage: FC = () => {
     if (isTitleVisible) {
       setTimeout(() => {
         setImageVisible(true);
-      }, 1500);
+      }, 1000);
     }
 
     if (isImageVisible) {
