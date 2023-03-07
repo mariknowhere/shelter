@@ -36,6 +36,13 @@ const ProblemsPage: FC<IPage> = ({ isAnimate, setAnimate }) => {
       setScrollFirstBlockCount(prevState => prevState - 5);
       setScrollSecondBlockCount(prevState => prevState - 5);
 
+      if (scrollSecondBlockCount === -120) {
+        // @ts-ignore
+        firstBlockRef.current!.classList.add('hidden');
+        // @ts-ignore
+        secondBlockRef.current!.classList.add('hidden');
+      }
+
       // @ts-ignore
       firstBlockRef.current!.style.transform = `translateY(${scrollFirstBlockCount}%)`;
       // @ts-ignore
