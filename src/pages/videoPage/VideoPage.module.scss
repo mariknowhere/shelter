@@ -1,15 +1,21 @@
+@import "src/styles/mixins/animate";
+
 .video {
   position: relative;
   background: #fff url(../../../public/assets/images/video_background.png) 0 0 no-repeat;
   height: 100vh;
 
   &-planets {
+    @include animateElement();
+
     position: absolute;
     right: 0;
     bottom: 90px;
   }
 
   &-item {
+    @include animateElement();
+
     cursor: pointer;
     position: absolute;
     top: 50%;
@@ -19,12 +25,16 @@
   }
 
   &-circle {
+    @include animateElement();
+
     position: absolute;
     top: 15px;
     left: 15px;
   }
 
   &-lines {
+    @include animateElement();
+
     position: absolute;
     top: 18px;
     right: 30px;

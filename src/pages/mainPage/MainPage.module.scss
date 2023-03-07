@@ -4,10 +4,6 @@
   background: #EBEBEB;
   height: 100vh;
 
-  &_active {
-    opacity: 1 !important;
-  }
-
   &-navbar {
     display: flex;
     flex-direction: row;
@@ -171,7 +167,7 @@
     width: 500%;
 
     animation-name: road;
-    animation-duration: 180s;
+    animation-duration: 90s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
 
@@ -181,7 +177,7 @@
       width: 131px;
       height: 584px;
       position: absolute;
-      top: -100%;
+      top: -170px;
       left: 60px;
       z-index: 1;
 
@@ -266,7 +262,7 @@
   }
 
   100% {
-    transform: translateX(-100%);
+    transform: translateX(-50%);
   }
 }
 

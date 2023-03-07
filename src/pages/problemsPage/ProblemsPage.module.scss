@@ -1,13 +1,14 @@
 .problems {
   position: relative;
-  background: #fff url(../../../public/assets/images/problems_background.png) 0 0 no-repeat;
+  background: #262626;
   height: 100vh;
 
   &-image {
-    &_second {
+
+    &-background {
       position: absolute;
-      bottom: 0;
-      left: 90px;
+      top: 0;
+      transform: translateY(100%);
     }
   }
 
@@ -24,8 +25,13 @@
     text-align: center;
     letter-spacing: 0.1em;
     text-transform: uppercase;
+    transition: 1s all linear;
 
     color: #FFFFFF;
+
+    &_red {
+      color: #DC1D03;
+    }
   }
 
   &-block {
@@ -36,6 +42,13 @@
     position: absolute;
     right: 60px;
     top: 155px;
+    transform: translateY(120%);
+
+    &_secondary {
+      position: absolute;
+      bottom: 0;
+      left: 90px;
+    }
 
     &-image {
       width: fit-content;

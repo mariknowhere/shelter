@@ -83,10 +83,10 @@ const MainPage = () => {
       </div>
       <div className={styles['main-text']}>
         <h1 data-main-title className={classNames(styles['main-title'], 'magic-text')}>!Shelter</h1>
-        <h2 className={classNames(styles['main-topic'], {[styles['main_active']]: isTopicVisible})}>
+        <h2 className={classNames(styles['main-topic'], {'active': isTopicVisible})}>
           уникальный благотворительный<br /> проект
         </h2>
-        <div className={classNames(styles['main-donations-wrapper'], { [styles['main_active']]: isDonationsVisible })}>
+        <div className={classNames(styles['main-donations-wrapper'], { 'active': isDonationsVisible })}>
           <div className={styles['main-donations']}>
             <div className={styles['main-donations-top']}>
               <img src="/assets/icons/light_white.svg" alt="Донаты" className={styles['main-donations-image']} />
@@ -100,7 +100,7 @@ const MainPage = () => {
         </div>
       </div>
       <div className={styles['main-list-wrapper']}>
-        <div className={classNames(styles['main-list-block'], { [styles['main_active']]: isPurpleBlockVisible })}/>
+        <div className={classNames(styles['main-list-block'], { 'active': isPurpleBlockVisible })}/>
         <div className={styles['main-list']}>
           <div className={styles['main-list-item']}>
             <img src="/assets/icons/light_black.svg" alt="Вместе мы сможем помочь" />
@@ -164,9 +164,9 @@ const MainPage = () => {
         <img
             src="/assets/icons/arrows.svg"
             alt="Стрелки"
-            className={classNames(styles['main-notation-dots'], {[styles['main_active']]: isArrowsVisible})}
+            className={classNames(styles['main-notation-dots'], {'active': isArrowsVisible})}
         />
-        <div className={classNames(styles['main-notation'], {[styles['main_active']]: isNotationVisible})}>
+        <div className={classNames(styles['main-notation'], {'active': isNotationVisible})}>
           <img src="/assets/icons/dots.svg" alt="Кавычки" />
           <span className={styles['main-notation-text']}>
             Благотворительный проект помощи животным на основе<br /> блокчейн и DAO технологии.

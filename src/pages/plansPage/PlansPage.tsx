@@ -1,21 +1,62 @@
-import {FC} from 'react';
+import {FC, useEffect, useState} from 'react';
 import styles from './PlansPage.module.scss';
 import classNames from "classnames";
+import {splitText} from "../../utils/splitText";
+import {animateText} from "../../utils/animateText";
 
 const PlansPage: FC = () => {
+  const [isTitleVisible, setTitleVisible]= useState(false);
+  const [isTopicVisible, setTopicVisible]= useState(false);
+  const [isDescriptionVisible, setDescriptionVisible]= useState(false);
+  const [isGreenPanelVisible, setGreenPanelVisible]= useState(false);
+  const [isRedPanelVisible, setRedPanelVisible]= useState(false);
+
+  useEffect(() => {
+    if (!isTitleVisible) {
+      splitText('data-plans-title');
+      animateText('data-plans-title', 2000);
+
+      setTitleVisible(true);
+    }
+
+    if (isTitleVisible) {
+      setTimeout(() => {
+        setTopicVisible(true);
+      }, 1000);
+    }
+
+    if (isTopicVisible) {
+      setTimeout(() => {
+        setDescriptionVisible(true);
+      }, 1000);
+    }
+
+    if (isDescriptionVisible) {
+      setTimeout(() => {
+        setGreenPanelVisible(true);
+      }, 1000);
+    }
+
+    if (isGreenPanelVisible) {
+      setTimeout(() => {
+        setRedPanelVisible(true);
+      }, 1000);
+    }
+  }, [isDescriptionVisible, isGreenPanelVisible, isTitleVisible, isTopicVisible]);
+
   return (
     <div className={styles['plans']}>
       <div className={styles['plans-content']}>
         <div className={styles['plans-header']}>
-          <h2 className={styles['plans-header-title']}>Shelter</h2>
-          <h3 className={styles['plans-header-topic']}>проект который уже работает!</h3>
-          <span className={styles['plans-header-description']}>
+          <h2 data-plans-title="" className={classNames(styles['plans-header-title'], 'magic-text')}>Shelter</h2>
+          <h3 className={classNames(styles['plans-header-topic'], { 'active': isTopicVisible })}>проект который уже работает!</h3>
+          <span className={classNames(styles['plans-header-description'], { 'active': isDescriptionVisible })}>
             В данный момент мы проводим сбор средств в наше DAO, который будет распределен нашими консулами по нуждающимся
             приютам.
           </span>
         </div>
         <div className={styles['plans-block']}>
-          <div className={styles['plans-block-item']}>
+          <div className={classNames(styles['plans-block-item'], { 'active': isGreenPanelVisible })}>
             <h4 className={classNames(styles['plans-block-item-title'], styles['plans-block-item-title_green'])}>
               РЕАЛИЗУЕТСЯ СЕЙЧАС
             </h4>
@@ -44,7 +85,7 @@ const PlansPage: FC = () => {
               </div>
             </div>
           </div>
-          <div className={styles['plans-block-item']}>
+          <div className={classNames(styles['plans-block-item'], { 'active': isRedPanelVisible })}>
             <h4 className={classNames(styles['plans-block-item-title'], styles['plans-block-item-title_red'])}>
               В ПЛАНАХ РЕАЛИЗОВАТЬ
             </h4>

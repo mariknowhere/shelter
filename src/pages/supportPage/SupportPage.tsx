@@ -1,17 +1,57 @@
-import {FC} from "react";
+import {FC, useEffect, useRef, useState} from "react";
 import styles from './SupportPage.module.scss';
+import {IPage} from "../PageTypes";
+import classNames from "classnames";
 
-const SupportPage: FC = () => {
+const SupportPage: FC<IPage> = ({ isAnimate, setAnimate }) => {
+  const supportBlockRef = useRef(null);
+  const [scrollBlockCount, setScrollBlockCount] = useState(100);
+
+  const [isTitleVisible, setTitleVisible]= useState(false);
+  const [isTopicVisible, setTopicVisible]= useState(false);
+  const [isButtonVisible, setButtonVisible]= useState(false);
+
+  const onWheel = () => {
+    if (scrollBlockCount === -45) {
+      setAnimate(true);
+    } else {
+      setScrollBlockCount(prevState => prevState - 1);
+    }
+
+    // @ts-ignore
+    supportBlockRef.current!.style.transform = `translate(${scrollBlockCount}%)`;
+  }
+  
+  useEffect(() => {
+    if (!isTitleVisible) {
+      setTimeout(() => {
+        setTitleVisible(true);
+      }, 1000);
+    }
+
+    if (isTitleVisible) {
+      setTimeout(() => {
+        setTopicVisible(true);
+      }, 1000);
+    }
+
+    if (isTopicVisible) {
+      setTimeout(() => {
+        setButtonVisible(true);
+      }, 1000);
+    }
+  }, [isTitleVisible, isTopicVisible]);
+
   return (
-    <div className={styles['support']}>
+    <div onWheel={onWheel} className={styles['support']}>
       <div className={styles['support-content']}>
         <div className={styles['support-text']}>
-          <h2 className={styles['support-title']}>схема предоставления помощи приютам</h2>
-          <span className={styles['support-description']}>
+          <h2 className={classNames(styles['support-title'], { 'active': isTitleVisible })}>схема предоставления помощи приютам</h2>
+          <span className={classNames(styles['support-description'], { 'active': isTopicVisible })}>
             Вся система строится на прозрачности и каждый пользователь сможет отследить историю транзакции.
           </span>
         </div>
-        <div className={styles['support-block']}>
+        <div ref={supportBlockRef} className={styles['support-block']}>
           <div className={styles['support-block-item']}>
             <img src="/assets/icons/triangle.svg" alt="Треугольник" className={styles['support-block-item-tringle']} />
             <div className={styles['support-block-item-content']}>
@@ -49,14 +89,14 @@ const SupportPage: FC = () => {
           <div className={styles['support-block-item']}>
             <img src="/assets/icons/triangle.svg" alt="Треугольник" className={styles['support-block-item-tringle']} />
             <div className={styles['support-block-item-content']}>
-              <img src="/assets/images/support_black.png" alt="Задний фон" />
+              <img src="/assets/images/support_blue.png" alt="Задний фон" />
               <span className={styles['support-block-item-text']}>
                 Поступление средств на кошелек приюта
               </span>
             </div>
           </div>
         </div>
-        <div className={styles['support-bottom-wrapper']}>
+        <div className={classNames(styles['support-bottom-wrapper'], { 'active': isButtonVisible })}>
           <div className={styles['support-bottom']}>
             <h4 className={styles['support-bottom-title']}>Ваш приют нуждается в помощи?</h4>
             <button className={styles['support-bottom-button']}>Заполнить заявку</button>

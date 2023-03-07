@@ -1,9 +1,13 @@
+@import "src/styles/mixins/animate";
+
 .consuls {
   position: relative;
   background: #fff url(../../../public/assets/images/consuls_background.png) 0 0 no-repeat;
   height: 100vh;
 
   &-globus {
+    @include animateElement();
+
     position: absolute;
     bottom: 0;
     right: 0;
@@ -19,6 +23,8 @@
   }
 
   &-top {
+    @include animateElement();
+
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -45,6 +51,8 @@
   }
 
   &-body {
+    @include animateElement();
+
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -93,6 +101,8 @@
   }
 
   &-bottom {
+    @include animateElement();
+
     display: flex;
     flex-direction: column;
     gap: 10px;

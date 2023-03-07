@@ -1,15 +1,28 @@
 import {FC, useEffect, useRef, useState} from 'react';
 import styles from './PeoplePage.module.scss';
+import {splitText} from "../../utils/splitText";
+import {animateText} from "../../utils/animateText";
+import classNames from "classnames";
 
 const PeoplePage: FC = () => {
     const [heightImage, setHeightImage] = useState(0);
     const [widthImage, setWidthImage] = useState(0);
+
     const [count, setCount] = useState(0);
     const [peopleImageCount, setPeopleImageCount] = useState(1);
+
+    const [isTitleVisible, setTitleVisible]= useState(false);
 
     const peopleWrapper = useRef(null);
 
     useEffect(() => {
+        if (!isTitleVisible) {
+            splitText('data-people-title');
+            animateText('data-people-title', 1000);
+
+            setTitleVisible(true);
+        }
+
         setCount(prevState => prevState + 1);
 
         if (count >= 50) {
@@ -26,7 +39,10 @@ const PeoplePage: FC = () => {
             let imageWidth = image.width;
             let imageHeight = image.height;
 
-            console.log(image.width)
+            if (!imageWidth && !imageHeight) {
+                imageWidth = 350;
+                imageHeight = 350;
+            }
 
             image.style.top = `${heightImage - imageHeight / 2}px`
             image.style.position = `absolute`
@@ -49,8 +65,7 @@ const PeoplePage: FC = () => {
   return (
     <div ref={peopleWrapper} onMouseMove={onMouseMove} className={styles['people']}>
       <div className={styles['people-text']}>
-        <h2 className={styles['people-title']}>Медийные</h2>
-        <h2 className={styles['people-title']}>личности</h2>
+        <h2 data-people-title className={classNames(styles['people-title'], 'magic-text')}>Медийные личности</h2>
       </div>
     </div>
   );

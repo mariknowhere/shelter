@@ -1,3 +1,5 @@
+@import "src/styles/mixins/animate";
+
 .solution {
   position: relative;
   background: #fff url(../../../public/assets/images/solution.png) 0 0 no-repeat;
@@ -5,18 +7,26 @@
 
   &-image {
     &-fourth {
+      @include animateElement();
+
       position: absolute;
       left: 180px;
       bottom: 25%;
+      z-index: 1;
     }
 
     &-fifth {
+      @include animateElement();
+
       position: absolute;
       right: 45px;
       bottom: 25%;
+      z-index: 1;
     }
 
     &-sixth {
+      @include animateElement();
+
       position: absolute;
       right: 50%;
       bottom: 0;
@@ -25,11 +35,13 @@
   }
 
   &-title {
+    @include animateElement();
+
     z-index: 1;
     position: absolute;
     top: 50%;
     right: 50%;
-    transform: translate(50%, -50%);
+    transform: translate(50%, -50%) scale(0.3);
 
     font-family: 'Vipnagorgialla', sans-serif;
     font-weight: 400;
@@ -40,6 +52,11 @@
     text-transform: uppercase;
 
     color: #FFFFFF;
+
+    &_active {
+      opacity: 1;
+      transform: translate(50%, -50%) scale(1);
+    }
   }
 
   &-item {
@@ -51,16 +68,22 @@
       z-index: 2;
 
       &_first {
+        @include animateElement();
+
         top: 0;
         left: 0;
       }
 
       &_second {
+        @include animateElement();
+
         top: 0;
         right: 0;
       }
 
       &_third {
+        @include animateElement();
+
         top: 142px;
         right: 50%;
         transform: translate(50%, 0);

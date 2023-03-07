@@ -1,16 +1,38 @@
-import {FC, useEffect} from 'react';
+import {FC, useEffect, useState} from 'react';
 import styles from './TeamPage.module.scss';
+import {splitText} from "../../utils/splitText";
+import {animateText} from "../../utils/animateText";
+import classNames from "classnames";
 
 const TeamPage: FC = () => {
+  const [isTopVisible, setTopVisible]= useState(false);
+  const [isSwiperVisible, setSwiperVisible]= useState(false);
+  const [isLinksVisible, setLinksVisible]= useState(false);
 
   useEffect(() => {
+    if (!isTopVisible) {
+      setTimeout(() => {
+        setTopVisible(true);
+      }, 1000);
+    }
 
-  }, []);
+    if (isTopVisible) {
+      setTimeout(() => {
+        setSwiperVisible(true);
+      }, 1000);
+    }
+
+    if (isSwiperVisible) {
+      setTimeout(() => {
+        setLinksVisible(true);
+      }, 1000);
+    }
+  }, [isSwiperVisible, isTopVisible]);
 
   return (
     <div className={styles['team']}>
       <div className={styles['team-content']}>
-        <div className={styles['team-top']}>
+        <div className={classNames(styles['team-top'], { 'active':  isTopVisible})}>
           <span className={styles['team-top-text']}>наша Команда</span>
           <span className={styles['team-top-text']}>наша Команда</span>
           <span className={styles['team-top-text']}>наша Команда</span>
@@ -26,7 +48,7 @@ const TeamPage: FC = () => {
           <span className={styles['team-top-text']}>наша Команда</span>
           <span className={styles['team-top-text']}>наша Команда</span>
         </div>
-        <div className={styles['team-swiper']}>
+        <div className={classNames(styles['team-swiper'], { 'active': isSwiperVisible })}>
           <div className={styles['team-swiper-slide']}>
             <img
               src="/assets/images/team-person-1.png"
@@ -136,7 +158,7 @@ const TeamPage: FC = () => {
             </div>
           </div>
         </div>
-        <div className={styles['team-links-wrapper']}>
+        <div className={classNames(styles['team-links-wrapper'], { 'active': isLinksVisible })}>
           <div className={styles['team-links']}>
             <a href="/#" className={styles['team-links-item']}>
               Vkontakte

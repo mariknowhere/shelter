@@ -1,12 +1,47 @@
-import {FC} from 'react';
+import {FC, useEffect, useState} from 'react';
 import styles from './ConsulsPage.module.scss';
+import classNames from "classnames";
 
 const ConsulsPage: FC = () => {
+  const [isTopVisible, setTopVisible]= useState(false);
+  const [isBodyVisible, setBodyVisible]= useState(false);
+  const [isBottomVisible, setBottomVisible]= useState(false);
+  const [isGlobusVisible, setGlobusVisible]= useState(false);
+
+  useEffect(() => {
+    if (!isTopVisible) {
+      setTimeout(() => {
+        setTopVisible(true);
+      }, 1000);
+    }
+
+    if (isTopVisible) {
+      setTimeout(() => {
+        setBodyVisible(true);
+      }, 1000);
+    }
+
+    if (isBodyVisible) {
+      setTimeout(() => {
+        setBottomVisible(true);
+      }, 1000);
+    }
+
+    if (isBottomVisible) {
+      setTimeout(() => {
+        setGlobusVisible(true);
+      }, 1000);
+    }
+  }, [isBodyVisible, isBottomVisible, isTopVisible]);
+
   return (
     <div className={styles['consuls']}>
-      <img src="/assets/images/globus.png" alt="Глобус" className={styles['consuls-globus']}/>
+      <img src="/assets/images/globus.png"
+           alt="Глобус"
+           className={classNames(styles['consuls-globus'], { 'active': isGlobusVisible })}
+      />
       <div className={styles['consuls-content']}>
-        <div className={styles['consuls-top']}>
+        <div className={classNames(styles['consuls-top'], { 'active': isTopVisible })}>
           <h2 className={styles['consuls-top-title']}>Использование ДАО</h2>
           <span className={styles['consuls-top-description']}>
             Что такое ДАО? Децентрализованная автономная организация - система в блокчейне, которая управляется с
@@ -14,7 +49,7 @@ const ConsulsPage: FC = () => {
             В нашем случае в Shelter консулами будут:
           </span>
         </div>
-        <div className={styles['consuls-body']}>
+        <div className={classNames(styles['consuls-body'], { 'active': isBodyVisible })}>
           <h3 className={styles['consuls-body-title']}>Консулы</h3>
           <div className={styles['consuls-body-list']}>
             <div className={styles['consuls-body-item']}>
@@ -40,7 +75,7 @@ const ConsulsPage: FC = () => {
             </div>
           </div>
         </div>
-        <div className={styles['consuls-bottom']}>
+        <div className={classNames(styles['consuls-bottom'], { 'active': isBottomVisible })}>
           <h3 className={styles['consuls-bottom-title']}>Прозрачность</h3>
           <span className={styles['consuls-bottom-description']}>
             Значимость этих проблем настолько очевидна, что постоянный количественный рост и сфера нашей активности

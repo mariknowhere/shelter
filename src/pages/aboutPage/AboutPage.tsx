@@ -1,14 +1,37 @@
 import styles from './AboutPage.module.scss';
-import {FC, useEffect, useState} from "react";
+import {FC, useEffect, useRef, useState} from "react";
 import {splitText} from "../../utils/splitText";
 import {animateText} from "../../utils/animateText";
 import classNames from "classnames";
+import {IPage} from "../PageTypes";
 
-const AboutPage: FC = () => {
+const AboutPage: FC<IPage> = ({ isAnimate, setAnimate }) => {
   const [isTitleVisible, setTitleVisible]= useState(false);
   const [isImageVisible, setImageVisible]= useState(false);
   const [isTextVisible, setTextVisible]= useState(false);
   const [isButtonVisible, setButtonVisible]= useState(false);
+
+  const aboutImageFirstRef = useRef(null);
+  const aboutImageSecondRef = useRef(null);
+  const [scrollBlockCount, setScrollBlockCount] = useState(0);
+
+  const onWheel = () => {
+    if (scrollBlockCount === 250) {
+      setAnimate(true);
+
+      // @ts-ignore
+      aboutImageFirstRef.current!.classList.add('hidden');
+      // @ts-ignore
+      aboutImageSecondRef.current!.classList.add('hidden');
+    } else {
+      setScrollBlockCount(prevState => prevState + 10);
+    }
+
+    // @ts-ignore
+    aboutImageFirstRef.current!.style.transform = `translateY(-${scrollBlockCount}%)`;
+    // @ts-ignore
+    aboutImageSecondRef.current!.style.transform = `translateY(-${scrollBlockCount}%)`;
+  }
 
   useEffect(() => {
     if (!isTitleVisible) {
@@ -39,16 +62,18 @@ const AboutPage: FC = () => {
   }, [isTitleVisible, isImageVisible, isTextVisible]);
 
   return (
-    <div className={styles['about']}>
+    <div onWheel={onWheel} className={styles['about']}>
       <img
           src="/assets/images/about-1.png"
           alt="О проекте"
           className={classNames(styles['about-image_first'], { 'active': isImageVisible })}
+          ref={aboutImageFirstRef}
       />
       <img
           src="/assets/images/about-2.png"
           alt="О проекте"
           className={classNames(styles['about-image_second'], { 'active': isImageVisible })}
+          ref={aboutImageSecondRef}
       />
       <div className={styles['about-content']}>
         <div className={styles['about-left-panel']}>
