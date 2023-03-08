@@ -66,7 +66,7 @@ const ProblemsPage: FC<IPage> = ({ isAnimate, setAnimate }) => {
       <div ref={firstBlockRef} className={styles['problems-block']}>
         <img src="/assets/images/problems-1.png" alt="Фотография" className={styles['problems-block-image']}/>
         <div className={styles['problems-block-text']}>
-          <h4 className={styles['problems-block-title']}>Общее количество бездомных животных в СНГ или мире</h4>
+          <h3 className={styles['problems-block-title']}>Общее количество бездомных животных в СНГ или мире</h3>
           <span className={styles['problems-block-description']}>
             В мире по примерным расчетам количество бездомных животных около 30 миллиардов котов и 10 триллионов собак.
             Это огромное количество животных находится на улице или уже внутри немногочисленных приютов по всему миру.
@@ -76,7 +76,7 @@ const ProblemsPage: FC<IPage> = ({ isAnimate, setAnimate }) => {
       <div ref={secondBlockRef} className={classNames(styles['problems-block'], styles['problems-block_secondary'])}>
         <img src="/assets/images/problems-1.png" alt="Фотография" className={styles['problems-block-image']}/>
         <div className={styles['problems-block-text']}>
-          <h4 className={styles['problems-block-title']}>Общее количество бездомных животных в СНГ или мире</h4>
+          <h3 className={styles['problems-block-title']}>Общее количество бездомных животных в СНГ или мире</h3>
           <span className={styles['problems-block-description']}>
             В мире по примерным расчетам количество бездомных животных около 30 миллиардов котов и 10 триллионов собак.
             Это огромное количество животных находится на улице или уже внутри немногочисленных приютов по всему миру.
