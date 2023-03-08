@@ -24,20 +24,20 @@ const NearPage: FC = () => {
     if (isTitleVisible) {
       setTimeout(() => {
         setTopicVisible(true);
-      }, 1000);
+      }, 500);
     }
 
     if (isTopicVisible) {
       setTimeout(() => {
         setItemFirstVisible(true);
         setPawVisible(true);
-      }, 1000);
+      }, 500);
     }
 
     if (isItemFirstVisible) {
       setTimeout(() => {
         setItemSecondVisible(true);
-      }, 1000);
+      }, 500);
     }
 
     if (isItemSecondVisible) {

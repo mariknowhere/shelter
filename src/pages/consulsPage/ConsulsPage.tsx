@@ -12,25 +12,25 @@ const ConsulsPage: FC = () => {
     if (!isTopVisible) {
       setTimeout(() => {
         setTopVisible(true);
-      }, 1000);
+      }, 500);
     }
 
     if (isTopVisible) {
       setTimeout(() => {
         setBodyVisible(true);
-      }, 1000);
+      }, 500);
     }
 
     if (isBodyVisible) {
       setTimeout(() => {
         setBottomVisible(true);
-      }, 1000);
+      }, 500);
     }
 
     if (isBottomVisible) {
       setTimeout(() => {
         setGlobusVisible(true);
-      }, 1000);
+      }, 500);
     }
   }, [isBodyVisible, isBottomVisible, isTopVisible]);
 

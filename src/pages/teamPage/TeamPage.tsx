@@ -13,19 +13,19 @@ const TeamPage: FC = () => {
     if (!isTopVisible) {
       setTimeout(() => {
         setTopVisible(true);
-      }, 1000);
+      }, 500);
     }
 
     if (isTopVisible) {
       setTimeout(() => {
         setSwiperVisible(true);
-      }, 1000);
+      }, 500);
     }
 
     if (isSwiperVisible) {
       setTimeout(() => {
         setLinksVisible(true);
-      }, 1000);
+      }, 500);
     }
   }, [isSwiperVisible, isTopVisible]);
 

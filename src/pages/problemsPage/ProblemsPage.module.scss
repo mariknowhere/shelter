@@ -9,6 +9,7 @@
       position: absolute;
       top: 0;
       transform: translateY(100%);
+      transition: .2s all linear;
     }
   }
 
@@ -43,6 +44,7 @@
     right: 60px;
     top: 155px;
     transform: translateY(120%);
+    transition: .2s all linear;
 
     &_secondary {
       position: absolute;

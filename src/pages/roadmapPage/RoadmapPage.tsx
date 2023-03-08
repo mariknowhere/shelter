@@ -11,10 +11,10 @@ const RoadmapPage: FC<IPage> = ({ isAnimate, setAnimate }) => {
   const [isTitleVisible, setTitleVisible]= useState(false);
 
   const onWheel = () => {
-    if (scrollBlockCount === -50) {
+    if (scrollBlockCount <= -50) {
       setAnimate(true)
     } else {
-      setScrollBlockCount(prevState => prevState - 1)
+      setScrollBlockCount(prevState => prevState - 3)
     }
 
     // @ts-ignore
@@ -24,7 +24,7 @@ const RoadmapPage: FC<IPage> = ({ isAnimate, setAnimate }) => {
   useEffect(() => {
     if (!isTitleVisible) {
       splitText('data-roadmap-title');
-      animateText('data-roadmap-title', 3500);
+      animateText('data-roadmap-title', 3000);
 
       setTitleVisible(true);
     }

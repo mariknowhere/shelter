@@ -23,7 +23,7 @@ const PeoplePage: FC = () => {
             setTitleVisible(true);
         }
 
-        setCount(prevState => prevState + 1);
+        setCount(prevState => prevState + 2);
 
         if (count >= 50) {
 

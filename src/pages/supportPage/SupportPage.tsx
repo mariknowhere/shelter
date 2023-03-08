@@ -12,10 +12,10 @@ const SupportPage: FC<IPage> = ({ isAnimate, setAnimate }) => {
   const [isButtonVisible, setButtonVisible]= useState(false);
 
   const onWheel = () => {
-    if (scrollBlockCount === -45) {
+    if (scrollBlockCount <= -45) {
       setAnimate(true);
     } else {
-      setScrollBlockCount(prevState => prevState - 1);
+      setScrollBlockCount(prevState => prevState - 4);
     }
 
     // @ts-ignore
@@ -26,19 +26,19 @@ const SupportPage: FC<IPage> = ({ isAnimate, setAnimate }) => {
     if (!isTitleVisible) {
       setTimeout(() => {
         setTitleVisible(true);
-      }, 1000);
+      }, 500);
     }
 
     if (isTitleVisible) {
       setTimeout(() => {
         setTopicVisible(true);
-      }, 1000);
+      }, 500);
     }
 
     if (isTopicVisible) {
       setTimeout(() => {
         setButtonVisible(true);
-      }, 1000);
+      }, 500);
     }
   }, [isTitleVisible, isTopicVisible]);
 

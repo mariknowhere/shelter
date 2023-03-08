@@ -167,7 +167,7 @@
     width: 500%;
 
     animation-name: road;
-    animation-duration: 90s;
+    animation-duration: 45s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
 
@@ -189,6 +189,20 @@
     &-wrapper {
       position: relative;
       padding: 105px 0 0 60px;
+
+      &::before {
+        content: "";
+        display: block;
+
+        position: absolute;
+        bottom: -40px;
+        left: 0;
+
+        width: 60px;
+        height: 40px;
+        background: #EBEBEB;
+        z-index: 1;
+      }
     }
 
     &-item {

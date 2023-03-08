@@ -15,7 +15,7 @@ const MainPage = () => {
   useEffect(() => {
     if (!isTitleVisible) {
       splitText('data-main-title');
-      animateText('data-main-title', 4000);
+      animateText('data-main-title', 2000);
 
       setTitleVisible(true);
     }
@@ -23,34 +23,34 @@ const MainPage = () => {
     if (isTitleVisible) {
       setTimeout(() => {
         setPurpleBlockVisible(true);
-      }, 1500);
+      }, 500);
     }
 
-    if (isTitleVisible) {
+    if (isPurpleBlockVisible) {
       setTimeout(() => {
         setTopicVisible(true);
-      }, 3000);
+      }, 500);
     }
     
     if (isTopicVisible) {
       setTimeout(() => {
         setNotationVisible(true);
-      }, 1500);
+      }, 500);
     }
 
     if (isNotationVisible) {
       setTimeout(() => {
         setArrowsVisible(true);
-      }, 1500);
+      }, 500);
     }
 
     if (isArrowsVisible) {
       setTimeout(() => {
         setDonationsVisible(true);
-      }, 1500);
+      }, 500);
     }
 
-  }, [isArrowsVisible, isNotationVisible, isTitleVisible, isTopicVisible]);
+  }, [isArrowsVisible, isNotationVisible, isPurpleBlockVisible, isTitleVisible, isTopicVisible]);
 
   return (
     <div className={styles['main']}>

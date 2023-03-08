@@ -14,25 +14,25 @@ const SolutionPage: FC = () => {
         if (!isTitleVisible) {
             setTimeout(() => {
                 setTitleVisible(true);
-            }, 1000);
+            }, 500);
         }
 
         if (isTitleVisible) {
             setTimeout(() => {
                 setImageFirstVisible(true);
-            }, 1000);
+            }, 500);
         }
 
         if (isImageFirstVisible) {
             setTimeout(() => {
                 setImageSecondVisible(true);
-            }, 1000);
+            }, 500);
         }
 
         if (isImageSecondVisible) {
             setTimeout(() => {
                 setImageOtherVisible(true);
-            }, 1000);
+            }, 500);
         }
     }, [isImageFirstVisible, isImageSecondVisible, isTitleVisible]);
 

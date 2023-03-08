@@ -16,7 +16,7 @@ const AboutPage: FC<IPage> = ({ isAnimate, setAnimate }) => {
   const [scrollBlockCount, setScrollBlockCount] = useState(0);
 
   const onWheel = () => {
-    if (scrollBlockCount === 250) {
+    if (scrollBlockCount === 230) {
       setAnimate(true);
 
       // @ts-ignore
@@ -36,7 +36,7 @@ const AboutPage: FC<IPage> = ({ isAnimate, setAnimate }) => {
   useEffect(() => {
     if (!isTitleVisible) {
       splitText('data-about-title');
-      animateText('data-about-title', 2000);
+      animateText('data-about-title', 1000);
 
       setTitleVisible(true);
     }
@@ -44,7 +44,7 @@ const AboutPage: FC<IPage> = ({ isAnimate, setAnimate }) => {
     if (isTitleVisible) {
       setTimeout(() => {
         setImageVisible(true);
-      }, 1000);
+      }, 500);
     }
 
     if (isImageVisible) {

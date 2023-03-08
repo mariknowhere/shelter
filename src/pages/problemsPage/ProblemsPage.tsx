@@ -7,8 +7,8 @@ const ProblemsPage: FC<IPage> = ({ isAnimate, setAnimate }) => {
   const [isTitleRed, setTitleRed] = useState(true);
 
   const backgroundRef = useRef(null);
-  const [scrollBackgroundCount, setScrollBackgroundCount] = useState(100);
-  const [scrollBackgroundScaleCount, setScrollBackgroundScaleCount] = useState(0.5);
+  const [scrollBackgroundCount, setScrollBackgroundCount] = useState(80);
+  const [scrollBackgroundScaleCount, setScrollBackgroundScaleCount] = useState(0.6);
 
   const firstBlockRef = useRef(null);
   const [scrollFirstBlockCount, setScrollFirstBlockCount] = useState(120);
@@ -28,13 +28,13 @@ const ProblemsPage: FC<IPage> = ({ isAnimate, setAnimate }) => {
       // @ts-ignore
       backgroundRef.current!.style.transform = `translateY(${scrollBackgroundCount}%) scale(${scrollBackgroundScaleCount})`;
     } else if (scrollFirstBlockCount >= 0) {
-      setScrollFirstBlockCount(prevState => prevState - 5);
+      setScrollFirstBlockCount(prevState => prevState - 10);
 
       // @ts-ignore
       firstBlockRef.current!.style.transform = `translateY(${scrollFirstBlockCount}%)`;
     } else if (scrollSecondBlockCount >= -120) {
-      setScrollFirstBlockCount(prevState => prevState - 5);
-      setScrollSecondBlockCount(prevState => prevState - 5);
+      setScrollFirstBlockCount(prevState => prevState - 10);
+      setScrollSecondBlockCount(prevState => prevState - 10);
 
       if (scrollSecondBlockCount === -120) {
         // @ts-ignore

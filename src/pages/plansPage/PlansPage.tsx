@@ -22,25 +22,25 @@ const PlansPage: FC = () => {
     if (isTitleVisible) {
       setTimeout(() => {
         setTopicVisible(true);
-      }, 1000);
+      }, 500);
     }
 
     if (isTopicVisible) {
       setTimeout(() => {
         setDescriptionVisible(true);
-      }, 1000);
+      }, 500);
     }
 
     if (isDescriptionVisible) {
       setTimeout(() => {
         setGreenPanelVisible(true);
-      }, 1000);
+      }, 500);
     }
 
     if (isGreenPanelVisible) {
       setTimeout(() => {
         setRedPanelVisible(true);
-      }, 1000);
+      }, 500);
     }
   }, [isDescriptionVisible, isGreenPanelVisible, isTitleVisible, isTopicVisible]);
 

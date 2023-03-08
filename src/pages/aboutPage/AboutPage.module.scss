@@ -7,19 +7,19 @@
 
   &-image {
     &_first {
-      @include animateElement();
-
       position: absolute;
       right: 140px;
       top: 0;
+      opacity: 0;
+      transition: .2s all linear;
     }
 
     &_second {
-      @include animateElement();
-
       position: absolute;
       bottom: 45px;
       left: 250px;
+      opacity: 0;
+      transition: .2s all linear;
     }
   }
 

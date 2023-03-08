@@ -12,25 +12,25 @@ const VideoPage: FC = () => {
         if (!isCircleVisible) {
             setTimeout(() => {
                 setCircleVisible(true);
-            }, 1000);
+            }, 500);
         }
 
         if (isCircleVisible) {
             setTimeout(() => {
                 setPlanetsVisible(true);
-            }, 1000);
+            }, 500);
         }
 
         if (isPlanetsVisible) {
             setTimeout(() => {
                 setLinesVisible(true);
-            }, 1000);
+            }, 500);
         }
 
         if (isLinesVisible) {
             setTimeout(() => {
                 setVideoVisible(true);
-            }, 1000);
+            }, 500);
         }
     }, [isCircleVisible, isLinesVisible, isPlanetsVisible]);
 
