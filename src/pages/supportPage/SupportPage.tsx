@@ -23,24 +23,26 @@ const SupportPage: FC<IPage> = ({ isAnimate, setAnimate }) => {
   }
   
   useEffect(() => {
-    if (!isTitleVisible) {
-      setTimeout(() => {
-        setTitleVisible(true);
-      }, 500);
-    }
+    if (isAnimate) {
+      if (!isTitleVisible) {
+        setTimeout(() => {
+          setTitleVisible(true);
+        }, 500);
+      }
 
-    if (isTitleVisible) {
-      setTimeout(() => {
-        setTopicVisible(true);
-      }, 500);
-    }
+      if (isTitleVisible) {
+        setTimeout(() => {
+          setTopicVisible(true);
+        }, 500);
+      }
 
-    if (isTopicVisible) {
-      setTimeout(() => {
-        setButtonVisible(true);
-      }, 500);
+      if (isTopicVisible) {
+        setTimeout(() => {
+          setButtonVisible(true);
+        }, 500);
+      }
     }
-  }, [isTitleVisible, isTopicVisible]);
+  }, [isAnimate, isTitleVisible, isTopicVisible]);
 
   return (
     <div onWheel={onWheel} className={styles['support']}>

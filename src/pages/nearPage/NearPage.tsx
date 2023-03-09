@@ -3,8 +3,9 @@ import styles from './NearPage.module.scss';
 import {splitText} from "../../utils/splitText";
 import {animateText} from "../../utils/animateText";
 import classNames from "classnames";
+import {IPage} from "../PageTypes";
 
-const NearPage: FC = () => {
+const NearPage: FC<IPage> = ({ isAnimate, setAnimate }) => {
   const [isTitleVisible, setTitleVisible]= useState(false);
   const [isTopicVisible, setTopicVisible]= useState(false);
   const [isParagraphVisible, setParagraphVisible]= useState(false);
@@ -14,44 +15,46 @@ const NearPage: FC = () => {
   const [isPawVisible, setPawVisible]= useState(false);
 
   useEffect(() => {
-    if (!isTitleVisible) {
-      splitText('data-near-title');
-      animateText('data-near-title', 2000);
+    if (isAnimate) {
+      if (!isTitleVisible) {
+        splitText('data-near-title');
+        animateText('data-near-title', 2000);
 
-      setTitleVisible(true);
-    }
+        setTitleVisible(true);
+      }
 
-    if (isTitleVisible) {
-      setTimeout(() => {
-        setTopicVisible(true);
-      }, 500);
-    }
+      if (isTitleVisible) {
+        setTimeout(() => {
+          setTopicVisible(true);
+        }, 500);
+      }
 
-    if (isTopicVisible) {
-      setTimeout(() => {
-        setItemFirstVisible(true);
-        setPawVisible(true);
-      }, 500);
-    }
+      if (isTopicVisible) {
+        setTimeout(() => {
+          setItemFirstVisible(true);
+          setPawVisible(true);
+        }, 500);
+      }
 
-    if (isItemFirstVisible) {
-      setTimeout(() => {
-        setItemSecondVisible(true);
-      }, 500);
-    }
+      if (isItemFirstVisible) {
+        setTimeout(() => {
+          setItemSecondVisible(true);
+        }, 500);
+      }
 
-    if (isItemSecondVisible) {
-      setTimeout(() => {
-        setParagraphVisible(true);
-      }, 300);
-    }
+      if (isItemSecondVisible) {
+        setTimeout(() => {
+          setParagraphVisible(true);
+        }, 300);
+      }
 
-    if (isParagraphVisible) {
-      setTimeout(() => {
-        setItemThirdVisible(true);
-      }, 500);
+      if (isParagraphVisible) {
+        setTimeout(() => {
+          setItemThirdVisible(true);
+        }, 500);
+      }
     }
-  }, [isItemFirstVisible, isItemSecondVisible, isParagraphVisible, isTitleVisible, isTopicVisible]);
+  }, [isAnimate, isItemFirstVisible, isItemSecondVisible, isParagraphVisible, isTitleVisible, isTopicVisible]);
 
   return (
     <div className={styles['near']}>

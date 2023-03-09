@@ -3,8 +3,9 @@ import styles from './PeoplePage.module.scss';
 import {splitText} from "../../utils/splitText";
 import {animateText} from "../../utils/animateText";
 import classNames from "classnames";
+import {IPage} from "../PageTypes";
 
-const PeoplePage: FC = () => {
+const PeoplePage: FC<IPage> = ({ isAnimate, setAnimate }) => {
     const [heightImage, setHeightImage] = useState(0);
     const [widthImage, setWidthImage] = useState(0);
 
@@ -16,18 +17,27 @@ const PeoplePage: FC = () => {
     const peopleWrapper = useRef(null);
 
     useEffect(() => {
-        if (!isTitleVisible) {
-            splitText('data-people-title');
-            animateText('data-people-title', 1000);
+        if (isAnimate) {
+            if (!isTitleVisible) {
+                splitText('data-people-title');
+                animateText('data-people-title', 1000);
 
-            setTitleVisible(true);
+                setTitleVisible(true);
+            }
+
+            setInterval(() => {
+                setCount(prevState => prevState + 1)
+            }, 0)
+
         }
+    }, [isAnimate]);
 
-        setCount(prevState => prevState + 2);
+    const onMouseMove = (event: any) => {
+        setWidthImage(event.clientX);
+        setHeightImage(event.clientY);
 
-        if (count >= 50) {
-
-            if (peopleImageCount === 15) {
+        if (count >= 25) {
+            if (peopleImageCount >= 15) {
                 setPeopleImageCount(1)
             } else {
                 setPeopleImageCount(prevState => prevState + 1)
@@ -44,8 +54,8 @@ const PeoplePage: FC = () => {
                 imageHeight = 350;
             }
 
-            image.style.top = `${heightImage - imageHeight / 2}px`
             image.style.position = `absolute`
+            image.style.top = `${heightImage - imageHeight / 2}px`
             image.style.left = `${widthImage - imageWidth / 2}px`
             image.alt = `Человек`;
 
@@ -54,12 +64,6 @@ const PeoplePage: FC = () => {
 
             setCount(0);
         }
-
-    }, [heightImage, widthImage]);
-
-    const onMouseMove = (event: any) => {
-        setWidthImage(event.clientX);
-        setHeightImage(event.clientY);
     }
 
   return (

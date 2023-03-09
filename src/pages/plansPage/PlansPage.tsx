@@ -3,8 +3,9 @@ import styles from './PlansPage.module.scss';
 import classNames from "classnames";
 import {splitText} from "../../utils/splitText";
 import {animateText} from "../../utils/animateText";
+import {IPage} from "../PageTypes";
 
-const PlansPage: FC = () => {
+const PlansPage: FC<IPage> = ({ isAnimate, setAnimate }) => {
   const [isTitleVisible, setTitleVisible]= useState(false);
   const [isTopicVisible, setTopicVisible]= useState(false);
   const [isDescriptionVisible, setDescriptionVisible]= useState(false);
@@ -12,37 +13,39 @@ const PlansPage: FC = () => {
   const [isRedPanelVisible, setRedPanelVisible]= useState(false);
 
   useEffect(() => {
-    if (!isTitleVisible) {
-      splitText('data-plans-title');
-      animateText('data-plans-title', 2000);
+    if (isAnimate) {
+      if (!isTitleVisible) {
+        splitText('data-plans-title');
+        animateText('data-plans-title', 2000);
 
-      setTitleVisible(true);
-    }
+        setTitleVisible(true);
+      }
 
-    if (isTitleVisible) {
-      setTimeout(() => {
-        setTopicVisible(true);
-      }, 500);
-    }
+      if (isTitleVisible) {
+        setTimeout(() => {
+          setTopicVisible(true);
+        }, 500);
+      }
 
-    if (isTopicVisible) {
-      setTimeout(() => {
-        setDescriptionVisible(true);
-      }, 500);
-    }
+      if (isTopicVisible) {
+        setTimeout(() => {
+          setDescriptionVisible(true);
+        }, 500);
+      }
 
-    if (isDescriptionVisible) {
-      setTimeout(() => {
-        setGreenPanelVisible(true);
-      }, 500);
-    }
+      if (isDescriptionVisible) {
+        setTimeout(() => {
+          setGreenPanelVisible(true);
+        }, 500);
+      }
 
-    if (isGreenPanelVisible) {
-      setTimeout(() => {
-        setRedPanelVisible(true);
-      }, 500);
+      if (isGreenPanelVisible) {
+        setTimeout(() => {
+          setRedPanelVisible(true);
+        }, 500);
+      }
     }
-  }, [isDescriptionVisible, isGreenPanelVisible, isTitleVisible, isTopicVisible]);
+  }, [isAnimate, isDescriptionVisible, isGreenPanelVisible, isTitleVisible, isTopicVisible]);
 
   return (
     <div className={styles['plans']}>

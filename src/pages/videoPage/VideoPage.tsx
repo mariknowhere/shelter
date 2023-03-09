@@ -1,38 +1,41 @@
 import {FC, useEffect, useState} from 'react';
 import styles from './VideoPage.module.scss';
 import classNames from "classnames";
+import {IPage} from "../PageTypes";
 
-const VideoPage: FC = () => {
+const VideoPage: FC<IPage> = ({ isAnimate, setAnimate }) => {
     const [isCircleVisible, setCircleVisible]= useState(false);
     const [isPlanetsVisible, setPlanetsVisible]= useState(false);
     const [isLinesVisible, setLinesVisible]= useState(false);
     const [isVideoVisible, setVideoVisible]= useState(false);
 
     useEffect(() => {
-        if (!isCircleVisible) {
-            setTimeout(() => {
-                setCircleVisible(true);
-            }, 500);
-        }
+        if (isAnimate) {
+            if (!isCircleVisible) {
+                setTimeout(() => {
+                    setCircleVisible(true);
+                }, 500);
+            }
 
-        if (isCircleVisible) {
-            setTimeout(() => {
-                setPlanetsVisible(true);
-            }, 500);
-        }
+            if (isCircleVisible) {
+                setTimeout(() => {
+                    setPlanetsVisible(true);
+                }, 500);
+            }
 
-        if (isPlanetsVisible) {
-            setTimeout(() => {
-                setLinesVisible(true);
-            }, 500);
-        }
+            if (isPlanetsVisible) {
+                setTimeout(() => {
+                    setLinesVisible(true);
+                }, 500);
+            }
 
-        if (isLinesVisible) {
-            setTimeout(() => {
-                setVideoVisible(true);
-            }, 500);
+            if (isLinesVisible) {
+                setTimeout(() => {
+                    setVideoVisible(true);
+                }, 500);
+            }
         }
-    }, [isCircleVisible, isLinesVisible, isPlanetsVisible]);
+    }, [isAnimate, isCircleVisible, isLinesVisible, isPlanetsVisible]);
 
   return (
     <div className={styles['video']}>

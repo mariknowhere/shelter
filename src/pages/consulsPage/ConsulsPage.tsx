@@ -1,38 +1,41 @@
 import {FC, useEffect, useState} from 'react';
 import styles from './ConsulsPage.module.scss';
 import classNames from "classnames";
+import {IPage} from "../PageTypes";
 
-const ConsulsPage: FC = () => {
+const ConsulsPage: FC<IPage> = ({ isAnimate, setAnimate }) => {
   const [isTopVisible, setTopVisible]= useState(false);
   const [isBodyVisible, setBodyVisible]= useState(false);
   const [isBottomVisible, setBottomVisible]= useState(false);
   const [isGlobusVisible, setGlobusVisible]= useState(false);
 
   useEffect(() => {
-    if (!isTopVisible) {
-      setTimeout(() => {
-        setTopVisible(true);
-      }, 500);
-    }
+    if (isAnimate) {
+      if (!isTopVisible) {
+        setTimeout(() => {
+          setTopVisible(true);
+        }, 500);
+      }
 
-    if (isTopVisible) {
-      setTimeout(() => {
-        setBodyVisible(true);
-      }, 500);
-    }
+      if (isTopVisible) {
+        setTimeout(() => {
+          setBodyVisible(true);
+        }, 500);
+      }
 
-    if (isBodyVisible) {
-      setTimeout(() => {
-        setBottomVisible(true);
-      }, 500);
-    }
+      if (isBodyVisible) {
+        setTimeout(() => {
+          setBottomVisible(true);
+        }, 500);
+      }
 
-    if (isBottomVisible) {
-      setTimeout(() => {
-        setGlobusVisible(true);
-      }, 500);
+      if (isBottomVisible) {
+        setTimeout(() => {
+          setGlobusVisible(true);
+        }, 500);
+      }
     }
-  }, [isBodyVisible, isBottomVisible, isTopVisible]);
+  }, [isAnimate, isBodyVisible, isBottomVisible, isTopVisible]);
 
   return (
     <div className={styles['consuls']}>

@@ -3,31 +3,34 @@ import styles from './TeamPage.module.scss';
 import {splitText} from "../../utils/splitText";
 import {animateText} from "../../utils/animateText";
 import classNames from "classnames";
+import {IPage} from "../PageTypes";
 
-const TeamPage: FC = () => {
+const TeamPage: FC<IPage> = ({ isAnimate, setAnimate }) => {
   const [isTopVisible, setTopVisible]= useState(false);
   const [isSwiperVisible, setSwiperVisible]= useState(false);
   const [isLinksVisible, setLinksVisible]= useState(false);
 
   useEffect(() => {
-    if (!isTopVisible) {
-      setTimeout(() => {
-        setTopVisible(true);
-      }, 500);
-    }
+    if (isAnimate) {
+      if (!isTopVisible) {
+        setTimeout(() => {
+          setTopVisible(true);
+        }, 500);
+      }
 
-    if (isTopVisible) {
-      setTimeout(() => {
-        setSwiperVisible(true);
-      }, 500);
-    }
+      if (isTopVisible) {
+        setTimeout(() => {
+          setSwiperVisible(true);
+        }, 500);
+      }
 
-    if (isSwiperVisible) {
-      setTimeout(() => {
-        setLinksVisible(true);
-      }, 500);
+      if (isSwiperVisible) {
+        setTimeout(() => {
+          setLinksVisible(true);
+        }, 500);
+      }
     }
-  }, [isSwiperVisible, isTopVisible]);
+  }, [isAnimate, isSwiperVisible, isTopVisible]);
 
   return (
     <div className={styles['team']}>

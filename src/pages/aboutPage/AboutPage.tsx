@@ -34,32 +34,33 @@ const AboutPage: FC<IPage> = ({ isAnimate, setAnimate }) => {
   }
 
   useEffect(() => {
-    if (!isTitleVisible) {
-      splitText('data-about-title');
-      animateText('data-about-title', 1000);
+    if (isAnimate) {
+      if (!isTitleVisible) {
+        splitText('data-about-title');
+        animateText('data-about-title', 1000);
 
-      setTitleVisible(true);
+        setTitleVisible(true);
+      }
+
+      if (isTitleVisible) {
+        setTimeout(() => {
+          setImageVisible(true);
+        }, 500);
+      }
+
+      if (isImageVisible) {
+        setTimeout(() => {
+          setTextVisible(true);
+        }, 500);
+      }
+
+      if (isTextVisible) {
+        setTimeout(() => {
+          setButtonVisible(true);
+        }, 500);
+      }
     }
-
-    if (isTitleVisible) {
-      setTimeout(() => {
-        setImageVisible(true);
-      }, 500);
-    }
-
-    if (isImageVisible) {
-      setTimeout(() => {
-        setTextVisible(true);
-      }, 500);
-    }
-
-    if (isTextVisible) {
-      setTimeout(() => {
-        setButtonVisible(true);
-      }, 500);
-    }
-
-  }, [isTitleVisible, isImageVisible, isTextVisible]);
+  }, [isTitleVisible, isImageVisible, isTextVisible, isAnimate]);
 
   return (
     <div onWheel={onWheel} className={styles['about']}>

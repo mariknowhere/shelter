@@ -3,41 +3,44 @@ import styles from './SolutionPage.module.scss';
 import classNames from "classnames";
 import {splitText} from "../../utils/splitText";
 import {animateText} from "../../utils/animateText";
+import {IPage} from "../PageTypes";
 
-const SolutionPage: FC = () => {
+const SolutionPage: FC<IPage> = ({ className, isAnimate, setAnimate }) => {
     const [isTitleVisible, setTitleVisible]= useState(false);
     const [isImageFirstVisible, setImageFirstVisible]= useState(false);
     const [isImageSecondVisible, setImageSecondVisible]= useState(false);
     const [isImageOtherVisible, setImageOtherVisible]= useState(false);
 
     useEffect(() => {
+      if (isAnimate) {
         if (!isTitleVisible) {
-            setTimeout(() => {
-                setTitleVisible(true);
-            }, 500);
+          setTimeout(() => {
+            setTitleVisible(true);
+          }, 500);
         }
 
         if (isTitleVisible) {
-            setTimeout(() => {
-                setImageFirstVisible(true);
-            }, 500);
+          setTimeout(() => {
+            setImageFirstVisible(true);
+          }, 500);
         }
 
         if (isImageFirstVisible) {
-            setTimeout(() => {
-                setImageSecondVisible(true);
-            }, 500);
+          setTimeout(() => {
+            setImageSecondVisible(true);
+          }, 500);
         }
 
         if (isImageSecondVisible) {
-            setTimeout(() => {
-                setImageOtherVisible(true);
-            }, 500);
+          setTimeout(() => {
+            setImageOtherVisible(true);
+          }, 500);
         }
-    }, [isImageFirstVisible, isImageSecondVisible, isTitleVisible]);
+      }
+    }, [isAnimate, isImageFirstVisible, isImageSecondVisible, isTitleVisible]);
 
   return (
-    <div className={styles['solution']}>
+    <div className={classNames(styles['solution'], className)}>
       <h2 className={classNames(styles['solution-title'], { [styles['solution-title_active']]: isTitleVisible })}>решение</h2>
       <div className={classNames(
               styles['solution-item-wrapper'], styles['solution-item-wrapper_first'], { 'active': isImageOtherVisible }

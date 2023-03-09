@@ -22,13 +22,15 @@ const RoadmapPage: FC<IPage> = ({ isAnimate, setAnimate }) => {
   }
   
   useEffect(() => {
-    if (!isTitleVisible) {
-      splitText('data-roadmap-title');
-      animateText('data-roadmap-title', 3000);
+    if (isAnimate) {
+      if (!isTitleVisible) {
+        splitText('data-roadmap-title');
+        animateText('data-roadmap-title', 3000);
 
-      setTitleVisible(true);
+        setTitleVisible(true);
+      }
     }
-  }, [isTitleVisible]);
+  }, [isAnimate, isTitleVisible]);
 
   return (
     <div onWheel={onWheel} className={styles['roadmap']}>

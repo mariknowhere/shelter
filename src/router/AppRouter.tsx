@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import AboutPage from "../pages/aboutPage/AboutPage";
 import MainPage from "../pages/mainPage/MainPage";
 import ProblemsPage from "../pages/problemsPage/ProblemsPage";
-import SolutionPage from "../pages/solutionPage/SolutionPage";
 import PeoplePage from "../pages/peoplePage/PeoplePage";
 import RoadmapPage from "../pages/roadmapPage/RoadmapPage";
 import SupportPage from "../pages/supportPage/SupportPage";
@@ -22,7 +21,6 @@ const AppRouter = () => {
     const [activeIndexSlide, setActiveIndexSlide] = useState(0);
 
     const [isAboutPage, setAboutPage] = useState(false);
-    const [isSolutionPage, setSolutionPage] = useState(false);
     const [isNearPage, setNearPage] = useState(false);
     const [isPlansPage, setPlansPage] = useState(false);
     const [isConsulsPage, setConsulsPage] = useState(false);
@@ -66,16 +64,10 @@ const AppRouter = () => {
                 if (isProblemsAnimate) {
                     setTimeout(() => {
                         swiper.enabled = true;
-                    }, 500)
+                    }, 2000)
                 } else {
                     swiper.enabled = false;
                 }
-
-                break;
-            }
-
-            case PageListEnum.SolutionPage: {
-                setSolutionPage(true);
 
                 break;
             }
@@ -163,37 +155,34 @@ const AppRouter = () => {
             <MainPage />
         </SwiperSlide>
         <SwiperSlide>
-            {isAboutPage && <AboutPage isAnimate={isAboutAnimate} setAnimate={setAboutAnimate} />}
+            <AboutPage isAnimate={isAboutPage} setAnimate={setAboutAnimate} />
         </SwiperSlide>
         <SwiperSlide>
             <ProblemsPage isAnimate={isProblemsAnimate} setAnimate={setProblemsAnimate} />
         </SwiperSlide>
         <SwiperSlide>
-            {isSolutionPage && <SolutionPage />}
+            <NearPage isAnimate={isNearPage} setAnimate={setNearPage} />
         </SwiperSlide>
         <SwiperSlide>
-            {isNearPage && <NearPage />}
+            <PlansPage isAnimate={isPlansPage} setAnimate={setPlansPage} />
         </SwiperSlide>
         <SwiperSlide>
-            {isPlansPage && <PlansPage />}
+            <ConsulsPage isAnimate={isConsulsPage} setAnimate={setConsulsPage} />
         </SwiperSlide>
         <SwiperSlide>
-            {isConsulsPage && <ConsulsPage />}
+            <VideoPage isAnimate={isVideoPage} setAnimate={setVideoPage} />
         </SwiperSlide>
         <SwiperSlide>
-            {isVideoPage && <VideoPage />}
+            <PeoplePage isAnimate={isPeoplePage} setAnimate={setPeoplePage} />
         </SwiperSlide>
         <SwiperSlide>
-            {isPeoplePage && <PeoplePage />}
+            <RoadmapPage isAnimate={isRoadmapPage} setAnimate={setRoadMapAnimate} />
         </SwiperSlide>
         <SwiperSlide>
-            {isRoadmapPage && <RoadmapPage isAnimate={isRoadMapAnimate} setAnimate={setRoadMapAnimate} />}
+            <SupportPage isAnimate={isSupportPage} setAnimate={setSupportAnimate} />
         </SwiperSlide>
         <SwiperSlide>
-            {isSupportPage && <SupportPage isAnimate={isSupportAnimate} setAnimate={setSupportAnimate} />}
-        </SwiperSlide>
-        <SwiperSlide>
-            {isTeamPage && <TeamPage />}
+            <TeamPage isAnimate={isTeamPage} setAnimate={setTeamPage} />
         </SwiperSlide>
     </Swiper>
   );
