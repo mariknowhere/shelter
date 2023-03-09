@@ -75,7 +75,7 @@ const SolutionPage: FC<IPage> = ({ className, isAnimate, setAnimate }) => {
             src="/assets/images/solution-3.png"
             alt="использование криптовалюты"
           />
-          <h4 className={styles['solution-item-title']}>NEAR</h4>
+          <h3 className={styles['solution-item-title']}>NEAR</h3>
           <span className={classNames(styles['solution-item-text'], styles['solution-item-text_secondary'])}>
             почему он?
           </span>

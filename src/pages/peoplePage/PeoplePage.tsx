@@ -36,7 +36,7 @@ const PeoplePage: FC<IPage> = ({ isAnimate, setAnimate }) => {
         setWidthImage(event.clientX);
         setHeightImage(event.clientY);
 
-        if (count >= 25) {
+        if (count >= 50) {
             if (peopleImageCount >= 15) {
                 setPeopleImageCount(1)
             } else {

@@ -100,7 +100,7 @@ const SupportPage: FC<IPage> = ({ isAnimate, setAnimate }) => {
         </div>
         <div className={classNames(styles['support-bottom-wrapper'], { 'active': isButtonVisible })}>
           <div className={styles['support-bottom']}>
-            <h4 className={styles['support-bottom-title']}>Ваш приют нуждается в помощи?</h4>
+            <h3 className={styles['support-bottom-title']}>Ваш приют нуждается в помощи?</h3>
             <button className={styles['support-bottom-button']}>Заполнить заявку</button>
           </div>
         </div>
