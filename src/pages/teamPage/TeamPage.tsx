@@ -33,7 +33,7 @@ const TeamPage: FC<IPage> = ({ isAnimate, setAnimate }) => {
   }, [isAnimate, isSwiperVisible, isTopVisible]);
 
   return (
-    <div className={styles['team']}>
+    <div id="team" className={styles['team']}>
       <div className={styles['team-content']}>
         <div className={classNames(styles['team-top'], { 'active':  isTopVisible})}>
           <span className={styles['team-top-text']}>наша Команда</span>
@@ -163,16 +163,16 @@ const TeamPage: FC<IPage> = ({ isAnimate, setAnimate }) => {
         </div>
         <div className={classNames(styles['team-links-wrapper'], { 'active': isLinksVisible })}>
           <div className={styles['team-links']}>
-            <a href="/#" className={styles['team-links-item']}>
+            <a href="/#" className={classNames(styles['team-links-item'], styles['team-links-item_vk'])}>
               Vkontakte
             </a>
-            <a href="/#" className={styles['team-links-item']}>
+            <a href="/#" className={classNames(styles['team-links-item'], styles['team-links-item_instagram'])}>
               instagram
             </a>
-            <a href="/#" className={styles['team-links-item']}>
+            <a href="/#" className={classNames(styles['team-links-item'], styles['team-links-item_twitter'])}>
               twitter
             </a>
-            <a href="/#" className={styles['team-links-item']}>
+            <a href="/#" className={classNames(styles['team-links-item'], styles['team-links-item_facebook'])}>
               facebook
             </a>
           </div>

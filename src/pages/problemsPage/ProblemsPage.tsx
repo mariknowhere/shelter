@@ -122,7 +122,7 @@ const ProblemsPage: FC<IPage> = ({ isAnimate, setAnimate }) => {
   }
 
   return (
-    <div onWheel={onWheel}>
+    <div id="problems" onWheel={onWheel}>
       <div className={styles['problems']}>
         <img
           ref={backgroundRef}

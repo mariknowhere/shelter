@@ -101,8 +101,49 @@
       font-size: 40px;
       line-height: 130%;
       text-transform: uppercase;
+      transition: .2s all linear;
 
       color: #FFFFFF;
+
+      &_vk {
+        &:hover {
+          color: #7073FF;
+        }
+
+        &:active {
+          color: #1418D0;
+        }
+      }
+
+      &_instagram {
+        &:hover {
+          color: #F20E91;
+        }
+
+        &:active {
+          color: #CB0376;
+        }
+      }
+
+      &_twitter {
+        &:hover {
+          color: #FDC526;
+        }
+
+        &:active {
+          color: #AC7F00;
+        }
+      }
+
+      &_facebook {
+        &:hover {
+          color: #00AC7C;
+        }
+
+        &:active {
+          color: #007C5A;
+        }
+      }
     }
   }
 }

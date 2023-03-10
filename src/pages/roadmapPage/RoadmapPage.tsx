@@ -33,7 +33,7 @@ const RoadmapPage: FC<IPage> = ({ isAnimate, setAnimate }) => {
   }, [isAnimate, isTitleVisible]);
 
   return (
-    <div onWheel={onWheel} className={styles['roadmap']}>
+    <div id="roadmap" onWheel={onWheel} className={styles['roadmap']}>
       <img src="/assets/icons/light_white_secondary.svg" alt="Roadmap" className={styles['roadmap-light']} />
       <div className={styles['roadmap-block-wrapper']}>
         <img src="/assets/icons/light_white_secondary.svg" alt="Roadmap" className={styles['roadmap-block-light']} />

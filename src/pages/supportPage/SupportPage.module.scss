@@ -134,6 +134,16 @@
       padding: 22px 68px;
       background: #EBEBEB;
       border-radius: 130px;
+      transition: .2s all linear;
+
+      &:hover {
+        background: #FFFFFF;
+      }
+
+      &:active {
+        background: #017E5B;
+        color: white;
+      }
     }
   }
 }

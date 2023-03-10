@@ -63,7 +63,7 @@ const AboutPage: FC<IPage> = ({ isAnimate, setAnimate }) => {
   }, [isTitleVisible, isImageVisible, isTextVisible, isAnimate]);
 
   return (
-    <div onWheel={onWheel} className={styles['about']}>
+    <div id="about" onWheel={onWheel} className={styles['about']}>
       <img
           src="/assets/images/about-1.png"
           alt="О проекте"

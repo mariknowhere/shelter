@@ -44,6 +44,21 @@
         text-transform: uppercase;
 
         color: #262626;
+
+        &:active {
+          color: #5456B3;
+        }
+      }
+
+      &-image {
+        opacity: 0;
+        transition: .5s all linear;
+      }
+
+      &:hover {
+        .main-navbar-item-image {
+          opacity: 1;
+        }
       }
     }
   }
@@ -58,7 +73,7 @@
   &-title {
     font-family: 'Vipnagorgialla', sans-serif;
     font-weight: 400;
-    font-size: 225px;
+    font-size: 200px;
     line-height: 100%;
     text-transform: uppercase;
 
@@ -81,7 +96,6 @@
     display: flex;
     flex-direction: column;
     width: 233px;
-    height: 233px;
 
     border: 2px solid #FFFFFF;
     border-radius: 40px;
@@ -91,9 +105,9 @@
 
       cursor: pointer;
       padding: 25px;
-      position: absolute;
-      top: 20%;
-      right: -85px;
+      position: fixed;
+      top: 180px;
+      right: 150px;
       height: fit-content;
 
       background: #5456B3;
@@ -115,7 +129,7 @@
 
     &-top {
       display: flex;
-      padding: 20px;
+      padding: 18px 15px 30px;
       place-items: center;
       border-bottom: 2px solid #FFFFFF;
       flex-direction: column;
@@ -145,7 +159,25 @@
     &-bottom {
       display: flex;
       flex-direction: column;
-      padding: 10px 0 0;
+      border-radius: 0 0 36px 36px;
+      padding: 8px 0 12px;
+      transition: .2s all linear;
+
+      &:hover {
+        background: #FFFFFF;
+
+        .main-donations-bottom-title {
+          color: #5456B2;
+        }
+      }
+
+      &:active {
+        background: #1E2187;
+
+        .main-donations-bottom-title {
+          color: #FFFFFF;
+        }
+      }
 
       &-title {
         font-weight: 500;
@@ -286,7 +318,7 @@
   }
 
   50% {
-    transform: scale3d(1, 0.5, 1);
+    transform: scale3d(1, 0.8, 1);
   }
 
   100% {

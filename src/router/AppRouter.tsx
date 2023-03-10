@@ -145,7 +145,7 @@ const AppRouter = () => {
         modules={[Mousewheel, Pagination]}
         slidesPerView={1}
         spaceBetween={0}
-        // pagination={{ clickable: true }}
+        pagination={{ clickable: true }}
         allowTouchMove={false}
         mousewheel
         onSlideChange={onSlideChange}

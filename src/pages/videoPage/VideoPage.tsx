@@ -39,10 +39,15 @@ const VideoPage: FC<IPage> = ({ isAnimate, setAnimate }) => {
 
   return (
     <div className={styles['video']}>
-      <img src="/assets/images/video.png"
-           alt="Видео"
-           className={classNames(styles['video-item'], { 'active': isVideoVisible })}
-      />
+      <video
+        poster="/assets/images/video.png"
+        playsInline
+        muted
+        controls
+        className={classNames(styles['video-item'], {'active': isVideoVisible, [styles['video-item_active']]: isVideoVisible})}
+      >
+        <source src="/assets/video/example.mp4"/>
+      </video>
       <img src="/assets/icons/video_circle.svg"
            alt="Круг"
            className={classNames(styles['video-circle'], { 'active': isCircleVisible })}

@@ -36,7 +36,7 @@ const PeoplePage: FC<IPage> = ({ isAnimate, setAnimate }) => {
         setWidthImage(event.clientX);
         setHeightImage(event.clientY);
 
-        if (count >= 50) {
+        if (count >= 50 && widthImage) {
             if (peopleImageCount >= 15) {
                 setPeopleImageCount(1)
             } else {
@@ -67,7 +67,7 @@ const PeoplePage: FC<IPage> = ({ isAnimate, setAnimate }) => {
     }
 
   return (
-    <div ref={peopleWrapper} onMouseMove={onMouseMove} className={styles['people']}>
+    <div id="media" ref={peopleWrapper} onMouseMove={onMouseMove} className={styles['people']}>
       <div className={styles['people-text']}>
         <h2 data-people-title className={classNames(styles['people-title'], 'magic-text')}>Медийные личности</h2>
       </div>

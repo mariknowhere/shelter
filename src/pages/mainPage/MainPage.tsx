@@ -58,26 +58,32 @@ const MainPage = () => {
         <div className={styles['main-navbar-circle']} />
         <ul className={styles['main-navbar']}>
           <li className={styles['main-navbar-item']}>
-            <img src="/assets/icons/light_black.svg" alt="О проекте" />
-            <a href="/#" className={styles['main-navbar-item-text']}>О проекте</a>
+            <img src="/assets/icons/light_black.svg" alt="О проекте" className={styles['main-navbar-item-image']} />
+            <a href="/#about" className={styles['main-navbar-item-text']}>О проекте</a>
           </li>
           <li className={styles['main-navbar-item']}>
-            <a href="/#" className={styles['main-navbar-item-text']}>Медиа</a>
+            <img src="/assets/icons/light_black.svg" alt="О проекте" className={styles['main-navbar-item-image']} />
+            <a href="/#media" className={styles['main-navbar-item-text']}>Медиа</a>
           </li>
           <li className={styles['main-navbar-item']}>
-            <a href="/#" className={styles['main-navbar-item-text']}>Проблематика</a>
+            <img src="/assets/icons/light_black.svg" alt="О проекте" className={styles['main-navbar-item-image']} />
+            <a href="/#problems" className={styles['main-navbar-item-text']}>Проблематика</a>
           </li>
           <li className={styles['main-navbar-item']}>
-            <a href="/#" className={styles['main-navbar-item-text']}>Решение</a>
+            <img src="/assets/icons/light_black.svg" alt="О проекте" className={styles['main-navbar-item-image']} />
+            <a href="/#problems" className={styles['main-navbar-item-text']}>Решение</a>
           </li>
           <li className={styles['main-navbar-item']}>
-            <a href="/#" className={styles['main-navbar-item-text']}>Roadmap</a>
+            <img src="/assets/icons/light_black.svg" alt="О проекте" className={styles['main-navbar-item-image']} />
+            <a href="/#roadmap" className={styles['main-navbar-item-text']}>Roadmap</a>
           </li>
           <li className={styles['main-navbar-item']}>
-            <a href="/#" className={styles['main-navbar-item-text']}>Команда</a>
+            <img src="/assets/icons/light_black.svg" alt="О проекте" className={styles['main-navbar-item-image']} />
+            <a href="/#team" className={styles['main-navbar-item-text']}>Команда</a>
           </li>
           <li className={styles['main-navbar-item']}>
-            <a href="/#" className={styles['main-navbar-item-text']}>Контакты</a>
+            <img src="/assets/icons/light_black.svg" alt="О проекте" className={styles['main-navbar-item-image']} />
+            <a href="/#team" className={styles['main-navbar-item-text']}>Контакты</a>
           </li>
         </ul>
       </div>
@@ -94,7 +100,13 @@ const MainPage = () => {
               <span className={styles['main-donations-top-text']}>вместе мы сможем помочь приютам</span>
             </div>
             <div className={styles['main-donations-bottom']}>
-              <button className={styles['main-donations-bottom-title']}>Задонатить</button>
+              <a
+                href="https://app.astrodao.com/dao/shelter-dao.sputnik-dao.near"
+                target="_blank"
+                className={styles['main-donations-bottom-title']}
+              >
+                Задонатить
+              </a>
             </div>
           </div>
         </div>
