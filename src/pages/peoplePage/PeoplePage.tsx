@@ -20,7 +20,7 @@ const PeoplePage: FC<IPage> = ({ isAnimate, setAnimate }) => {
         if (isAnimate) {
             if (!isTitleVisible) {
                 splitText('data-people-title');
-                animateText('data-people-title', 1000);
+                animateText('data-people-title', 2500);
 
                 setTitleVisible(true);
             }
@@ -67,9 +67,9 @@ const PeoplePage: FC<IPage> = ({ isAnimate, setAnimate }) => {
     }
 
   return (
-    <div id="media" ref={peopleWrapper} onMouseMove={onMouseMove} className={styles['people']}>
+    <div ref={peopleWrapper} onMouseMove={onMouseMove} className={styles['people']}>
       <div className={styles['people-text']}>
-        <h2 data-people-title className={classNames(styles['people-title'], 'magic-text')}>Медийные личности</h2>
+        <h2 data-people-title="" className={classNames(styles['people-title'], 'magic-text')}>Медийные личности</h2>
       </div>
     </div>
   );

@@ -1,7 +1,5 @@
 import {FC, useEffect, useState} from 'react';
 import styles from './TeamPage.module.scss';
-import {splitText} from "../../utils/splitText";
-import {animateText} from "../../utils/animateText";
 import classNames from "classnames";
 import {IPage} from "../PageTypes";
 
@@ -33,7 +31,7 @@ const TeamPage: FC<IPage> = ({ isAnimate, setAnimate }) => {
   }, [isAnimate, isSwiperVisible, isTopVisible]);
 
   return (
-    <div id="team" className={styles['team']}>
+    <div className={styles['team']}>
       <div className={styles['team-content']}>
         <div className={classNames(styles['team-top'], { 'active':  isTopVisible})}>
           <span className={styles['team-top-text']}>наша Команда</span>

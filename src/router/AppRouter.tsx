@@ -6,10 +6,6 @@ import PeoplePage from "../pages/peoplePage/PeoplePage";
 import RoadmapPage from "../pages/roadmapPage/RoadmapPage";
 import SupportPage from "../pages/supportPage/SupportPage";
 import TeamPage from "../pages/teamPage/TeamPage";
-import NearPage from "../pages/nearPage/NearPage";
-import PlansPage from "../pages/plansPage/PlansPage";
-import VideoPage from "../pages/videoPage/VideoPage";
-import ConsulsPage from "../pages/consulsPage/ConsulsPage";
 import { Mousewheel, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -21,10 +17,6 @@ const AppRouter = () => {
     const [activeIndexSlide, setActiveIndexSlide] = useState(0);
 
     const [isAboutPage, setAboutPage] = useState(false);
-    const [isNearPage, setNearPage] = useState(false);
-    const [isPlansPage, setPlansPage] = useState(false);
-    const [isConsulsPage, setConsulsPage] = useState(false);
-    const [isVideoPage, setVideoPage] = useState(false);
     const [isPeoplePage, setPeoplePage] = useState(false);
     const [isRoadmapPage, setRoadmapPage] = useState(false);
     const [isSupportPage, setSupportPage] = useState(false);
@@ -35,7 +27,7 @@ const AppRouter = () => {
     const [isRoadMapAnimate, setRoadMapAnimate] = useState(false);
     const [isSupportAnimate, setSupportAnimate] = useState(false);
 
-    const [swiper, setSwiper] = useState({
+    const [swiper, setSwiper] = useState<any>({
         enabled: true
     });
 
@@ -68,30 +60,6 @@ const AppRouter = () => {
                 } else {
                     swiper.enabled = false;
                 }
-
-                break;
-            }
-
-            case PageListEnum.NearPage: {
-                setNearPage(true);
-
-                break;
-            }
-
-            case PageListEnum.PlansPage: {
-                setPlansPage(true);
-
-                break;
-            }
-
-            case PageListEnum.ConsulsPage: {
-                setConsulsPage(true);
-
-                break;
-            }
-
-            case PageListEnum.VideoPage: {
-                setVideoPage(true);
 
                 break;
             }
@@ -144,15 +112,18 @@ const AppRouter = () => {
         direction="vertical"
         modules={[Mousewheel, Pagination]}
         slidesPerView={1}
-        spaceBetween={0}
         pagination={{ clickable: true }}
         allowTouchMove={false}
-        mousewheel
+        mousewheel={{
+        }}
+        speed={2000}
+        effect="cards"
         onSlideChange={onSlideChange}
+        onInit={(swiper) => {setSwiper(swiper)}}
         className="router-swiper-wrapper"
     >
         <SwiperSlide className="router-swiper-slide">
-            <MainPage />
+            <MainPage swiper={swiper} />
         </SwiperSlide>
         <SwiperSlide>
             <AboutPage isAnimate={isAboutPage} setAnimate={setAboutAnimate} />
@@ -161,25 +132,23 @@ const AppRouter = () => {
             <ProblemsPage isAnimate={isProblemsAnimate} setAnimate={setProblemsAnimate} />
         </SwiperSlide>
         <SwiperSlide>
-            <NearPage isAnimate={isNearPage} setAnimate={setNearPage} />
-        </SwiperSlide>
-        <SwiperSlide>
-            <PlansPage isAnimate={isPlansPage} setAnimate={setPlansPage} />
-        </SwiperSlide>
-        <SwiperSlide>
-            <ConsulsPage isAnimate={isConsulsPage} setAnimate={setConsulsPage} />
-        </SwiperSlide>
-        <SwiperSlide>
-            <VideoPage isAnimate={isVideoPage} setAnimate={setVideoPage} />
-        </SwiperSlide>
-        <SwiperSlide>
             <PeoplePage isAnimate={isPeoplePage} setAnimate={setPeoplePage} />
         </SwiperSlide>
         <SwiperSlide>
-            <RoadmapPage isAnimate={isRoadmapPage} setAnimate={setRoadMapAnimate} />
+            <RoadmapPage
+              isPageVisible={isRoadmapPage}
+              isAnimate={isRoadMapAnimate}
+              setAnimate={setRoadMapAnimate}
+              activeSlideIndex={activeIndexSlide}
+            />
         </SwiperSlide>
         <SwiperSlide>
-            <SupportPage isAnimate={isSupportPage} setAnimate={setSupportAnimate} />
+            <SupportPage
+              isPageVisible={isSupportPage}
+              isAnimate={isSupportAnimate}
+              setAnimate={setSupportAnimate}
+              activeSlideIndex={activeIndexSlide}
+            />
         </SwiperSlide>
         <SwiperSlide>
             <TeamPage isAnimate={isTeamPage} setAnimate={setTeamPage} />

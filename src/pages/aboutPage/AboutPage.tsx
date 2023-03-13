@@ -37,9 +37,11 @@ const AboutPage: FC<IPage> = ({ isAnimate, setAnimate }) => {
     if (isAnimate) {
       if (!isTitleVisible) {
         splitText('data-about-title');
-        animateText('data-about-title', 1000);
+        animateText('data-about-title', 3000);
 
-        setTitleVisible(true);
+        setTimeout(() => {
+          setTitleVisible(true);
+        }, 1000)
       }
 
       if (isTitleVisible) {
@@ -63,7 +65,7 @@ const AboutPage: FC<IPage> = ({ isAnimate, setAnimate }) => {
   }, [isTitleVisible, isImageVisible, isTextVisible, isAnimate]);
 
   return (
-    <div id="about" onWheel={onWheel} className={styles['about']}>
+    <div onWheel={onWheel} className={styles['about']}>
       <img
           src="/assets/images/about-1.png"
           alt="О проекте"
@@ -115,7 +117,7 @@ const AboutPage: FC<IPage> = ({ isAnimate, setAnimate }) => {
               формированию позиции позволяет выполнять важные задания.
             </p>
           </div>
-          <h2 data-about-title className={classNames(styles['about-title_main'], 'magic-text')}>О проекте</h2>
+          <h2 data-about-title="" className={classNames(styles['about-title_main'], 'magic-text')}>О проекте</h2>
         </div>
       </div>
     </div>

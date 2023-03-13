@@ -57,6 +57,23 @@
       opacity: 1;
       transform: translate(50%, -50%) scale(1);
     }
+
+    &-wrapper {
+      font-family: 'Vipnagorgialla', sans-serif;
+      font-weight: 700;
+      font-size: 150px;
+      line-height: 100%;
+      text-align: center;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: 1s all linear;
+      color: white;
+
+      div {
+        position: absolute;
+        transition: .2s all linear;
+      }
+    }
   }
 
   &-item {

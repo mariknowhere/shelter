@@ -4,6 +4,9 @@
   position: relative;
   background: #EFECE5;
   height: 100vh;
+  z-index: 1;
+
+  transition: .2s all linear;
 
   &-image {
     &_first {

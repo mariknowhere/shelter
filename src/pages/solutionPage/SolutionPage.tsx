@@ -1,11 +1,18 @@
-import {FC, useEffect, useState} from "react";
+import React, {FC, useEffect, useState} from "react";
 import styles from './SolutionPage.module.scss';
 import classNames from "classnames";
-import {splitText} from "../../utils/splitText";
-import {animateText} from "../../utils/animateText";
-import {IPage} from "../PageTypes";
+import { ISolutionPage } from "../PageTypes";
 
-const SolutionPage: FC<IPage> = ({ className, isAnimate, setAnimate }) => {
+const SolutionPage: FC<ISolutionPage> = ({
+  className,
+  isAnimate,
+  setAnimate,
+  titleRef,
+  nearImageRef,
+  consulsImageRef,
+  plansImageRef,
+  videoImageRef,
+}) => {
     const [isTitleVisible, setTitleVisible]= useState(false);
     const [isImageFirstVisible, setImageFirstVisible]= useState(false);
     const [isImageSecondVisible, setImageSecondVisible]= useState(false);
@@ -41,8 +48,22 @@ const SolutionPage: FC<IPage> = ({ className, isAnimate, setAnimate }) => {
 
   return (
     <div className={classNames(styles['solution'], className)}>
+      <h2 ref={titleRef} className={styles['solution-title-wrapper']}>
+        <div>п</div>
+        <div>р</div>
+        <div>о</div>
+        <div>б</div>
+        <div>л</div>
+        <div>е</div>
+        <div>м</div>
+        <div>а</div>
+        <div>т</div>
+        <div>и</div>
+        <div>к</div>
+        <div>а</div>
+      </h2>
       <h2 className={classNames(styles['solution-title'], { [styles['solution-title_active']]: isTitleVisible })}>решение</h2>
-      <div className={classNames(
+      <div ref={plansImageRef} className={classNames(
               styles['solution-item-wrapper'], styles['solution-item-wrapper_first'], { 'active': isImageOtherVisible }
       )}>
         <div className={styles['solution-item']}>
@@ -54,7 +75,7 @@ const SolutionPage: FC<IPage> = ({ className, isAnimate, setAnimate }) => {
           <span className={styles['solution-item-text']}>использование криптовалюты</span>
         </div>
       </div>
-      <div className={classNames(
+      <div ref={consulsImageRef} className={classNames(
               styles['solution-item-wrapper'], styles['solution-item-wrapper_second'], { 'active': isImageOtherVisible }
       )}>
         <div className={styles['solution-item']}>
@@ -66,7 +87,7 @@ const SolutionPage: FC<IPage> = ({ className, isAnimate, setAnimate }) => {
           <span className={styles['solution-item-text']}>использование ДАО</span>
         </div>
       </div>
-      <div className={classNames(
+      <div ref={nearImageRef} className={classNames(
               styles['solution-item-wrapper'], styles['solution-item-wrapper_third'], { 'active': isImageOtherVisible }
       )}>
         <div className={styles['solution-item']}>
@@ -91,6 +112,7 @@ const SolutionPage: FC<IPage> = ({ className, isAnimate, setAnimate }) => {
       />
       <img src="/assets/images/solution-6.png"
            alt="Решение"
+           ref={videoImageRef}
            className={classNames(styles['solution-image-sixth'], { 'active': isImageOtherVisible })}
       />
     </div>

@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import styles from './MainPage.module.scss';
 import classNames from "classnames";
 import {splitText} from "../../utils/splitText";
 import {animateText} from "../../utils/animateText";
+import {IMainPage, PageListEnum} from "../PageTypes";
 
-const MainPage = () => {
+const MainPage: FC<IMainPage> = ({ swiper }) => {
   const [isTitleVisible, setTitleVisible]= useState(false);
   const [isTopicVisible, setTopicVisible]= useState(false);
   const [isNotationVisible, setNotationVisible]= useState(false);
@@ -52,6 +53,26 @@ const MainPage = () => {
 
   }, [isArrowsVisible, isNotationVisible, isPurpleBlockVisible, isTitleVisible, isTopicVisible]);
 
+  const onAboutClicked = () => {
+    swiper.slideTo(PageListEnum.AboutPage, 2000)
+  }
+
+  const onPeopleClicked = () => {
+    swiper.slideTo(PageListEnum.PeoplePage, 2000)
+  }
+
+  const onProblemsClicked = () => {
+    swiper.slideTo(PageListEnum.ProblemsPage, 2000)
+  }
+
+  const onRoadmapClicked = () => {
+    swiper.slideTo(PageListEnum.RoadmapPage, 2000)
+  }
+
+  const onTeamClicked = () => {
+    swiper.slideTo(PageListEnum.TeamPage, 2000)
+  }
+
   return (
     <div className={styles['main']}>
       <div className={styles['main-navbar-wrapper']}>
@@ -59,36 +80,36 @@ const MainPage = () => {
         <ul className={styles['main-navbar']}>
           <li className={styles['main-navbar-item']}>
             <img src="/assets/icons/light_black.svg" alt="О проекте" className={styles['main-navbar-item-image']} />
-            <a href="/#about" className={styles['main-navbar-item-text']}>О проекте</a>
+            <button onClick={onAboutClicked} className={styles['main-navbar-item-text']}>О проекте</button>
           </li>
           <li className={styles['main-navbar-item']}>
             <img src="/assets/icons/light_black.svg" alt="О проекте" className={styles['main-navbar-item-image']} />
-            <a href="/#media" className={styles['main-navbar-item-text']}>Медиа</a>
+            <button onClick={onPeopleClicked} className={styles['main-navbar-item-text']}>Медиа</button>
           </li>
           <li className={styles['main-navbar-item']}>
             <img src="/assets/icons/light_black.svg" alt="О проекте" className={styles['main-navbar-item-image']} />
-            <a href="/#problems" className={styles['main-navbar-item-text']}>Проблематика</a>
+            <button onClick={onProblemsClicked} className={styles['main-navbar-item-text']}>Проблематика</button>
           </li>
           <li className={styles['main-navbar-item']}>
             <img src="/assets/icons/light_black.svg" alt="О проекте" className={styles['main-navbar-item-image']} />
-            <a href="/#problems" className={styles['main-navbar-item-text']}>Решение</a>
+            <button onClick={onProblemsClicked} className={styles['main-navbar-item-text']}>Решение</button>
           </li>
           <li className={styles['main-navbar-item']}>
             <img src="/assets/icons/light_black.svg" alt="О проекте" className={styles['main-navbar-item-image']} />
-            <a href="/#roadmap" className={styles['main-navbar-item-text']}>Roadmap</a>
+            <button onClick={onRoadmapClicked} className={styles['main-navbar-item-text']}>Roadmap</button>
           </li>
           <li className={styles['main-navbar-item']}>
             <img src="/assets/icons/light_black.svg" alt="О проекте" className={styles['main-navbar-item-image']} />
-            <a href="/#team" className={styles['main-navbar-item-text']}>Команда</a>
+            <button onClick={onTeamClicked} className={styles['main-navbar-item-text']}>Команда</button>
           </li>
           <li className={styles['main-navbar-item']}>
             <img src="/assets/icons/light_black.svg" alt="О проекте" className={styles['main-navbar-item-image']} />
-            <a href="/#team" className={styles['main-navbar-item-text']}>Контакты</a>
+            <button onClick={onTeamClicked} className={styles['main-navbar-item-text']}>Контакты</button>
           </li>
         </ul>
       </div>
       <div className={styles['main-text']}>
-        <h1 data-main-title className={classNames(styles['main-title'], 'magic-text')}>!Shelter</h1>
+        <h1 data-main-title="" className={classNames(styles['main-title'], 'magic-text')}>!Shelter</h1>
         <h2 className={classNames(styles['main-topic'], {'active': isTopicVisible})}>
           уникальный благотворительный<br /> проект
         </h2>

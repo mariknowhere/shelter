@@ -1,21 +1,48 @@
 import {FC, useEffect, useRef, useState} from "react";
 import styles from './SupportPage.module.scss';
-import {IPage} from "../PageTypes";
+import {IPage, PageListEnum} from "../PageTypes";
 import classNames from "classnames";
 
-const SupportPage: FC<IPage> = ({ isAnimate, setAnimate }) => {
+const SupportPage: FC<IPage> = ({
+  isAnimate,
+  setAnimate,
+  activeSlideIndex,
+  isPageVisible ,
+}) => {
   const supportBlockRef = useRef(null);
   const [scrollBlockCount, setScrollBlockCount] = useState(100);
+  const [isAnimateDone, setAnimateDone] = useState(false);
 
   const [isTitleVisible, setTitleVisible]= useState(false);
   const [isTopicVisible, setTopicVisible]= useState(false);
   const [isButtonVisible, setButtonVisible]= useState(false);
 
   const onWheel = () => {
-    if (scrollBlockCount <= -45) {
+    if (scrollBlockCount <= -24 && !isAnimate && !isAnimateDone) {
       setAnimate(true);
-    } else {
+
+    } else if (scrollBlockCount < 100 && isAnimateDone) {
+      setScrollBlockCount(prevState => prevState + 4);
+
+      if (scrollBlockCount === 96 && isAnimateDone) {
+        setAnimate(true);
+        setAnimateDone(false);
+      }
+
+    } else if (!isAnimate) {
       setScrollBlockCount(prevState => prevState - 4);
+    }
+
+    if (PageListEnum.TeamPage === activeSlideIndex && isAnimate) {
+      setTimeout(() => {
+        if (scrollBlockCount >= 96) {
+          setAnimateDone(false);
+          setAnimate(false);
+        } else {
+          setAnimateDone(true);
+          setAnimate(false);
+        }
+      }, 2000);
     }
 
     // @ts-ignore
@@ -23,7 +50,7 @@ const SupportPage: FC<IPage> = ({ isAnimate, setAnimate }) => {
   }
   
   useEffect(() => {
-    if (isAnimate) {
+    if (isPageVisible) {
       if (!isTitleVisible) {
         setTimeout(() => {
           setTitleVisible(true);
@@ -42,7 +69,7 @@ const SupportPage: FC<IPage> = ({ isAnimate, setAnimate }) => {
         }, 500);
       }
     }
-  }, [isAnimate, isTitleVisible, isTopicVisible]);
+  }, [isPageVisible, isTitleVisible, isTopicVisible]);
 
   return (
     <div onWheel={onWheel} className={styles['support']}>
