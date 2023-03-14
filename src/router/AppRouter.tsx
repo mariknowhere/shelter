@@ -112,7 +112,7 @@ const AppRouter = () => {
         direction="vertical"
         modules={[Mousewheel, Pagination]}
         slidesPerView={1}
-        pagination={{ clickable: true }}
+        // pagination={{ clickable: true }}
         allowTouchMove={false}
         mousewheel={{
         }}
