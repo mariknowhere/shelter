@@ -112,7 +112,7 @@ const AppRouter = () => {
         direction="vertical"
         modules={[Mousewheel, Pagination]}
         slidesPerView={1}
-        // pagination={{ clickable: true }}
+        pagination={{ clickable: true }}
         allowTouchMove={false}
         mousewheel={{
         }}
@@ -134,7 +134,7 @@ const AppRouter = () => {
             />
         </SwiperSlide>
         <SwiperSlide>
-            <ProblemsPage isAnimate={isProblemsAnimate} setAnimate={setProblemsAnimate} />
+            <ProblemsPage isAnimate={isProblemsAnimate} setAnimate={setProblemsAnimate} activeSlideIndex={activeIndexSlide} />
         </SwiperSlide>
         <SwiperSlide>
             <PeoplePage isAnimate={isPeoplePage} setAnimate={setPeoplePage} />

@@ -25,45 +25,45 @@ const PeoplePage: FC<IPage> = ({ isAnimate, setAnimate }) => {
                 setTitleVisible(true);
             }
 
-            setInterval(() => {
-                setCount(prevState => prevState + 1)
-            }, 0)
+            setCount(prevState => prevState+1);
 
+            console.log(widthImage)
+
+            if (count >= 50 && widthImage) {
+                if (peopleImageCount >= 15) {
+                    setPeopleImageCount(1)
+                } else {
+                    setPeopleImageCount(prevState => prevState + 1)
+                }
+
+                const image = document.createElement('img');
+                image.src = `/assets/images/people-${peopleImageCount}.png`;
+
+                let imageWidth = image.width;
+                let imageHeight = image.height;
+
+                if (!imageWidth && !imageHeight) {
+                    imageWidth = 350;
+                    imageHeight = 350;
+                }
+
+                image.style.position = `absolute`
+                image.style.top = `${heightImage - imageHeight / 2}px`
+                image.style.left = `${widthImage - imageWidth / 2}px`
+                image.alt = `Человек`;
+
+                // @ts-ignore
+                peopleWrapper.current!.appendChild(image)
+
+                setCount(0);
+            }
         }
-    }, [isAnimate]);
+        
+    }, [heightImage, isAnimate, isTitleVisible, peopleImageCount, widthImage]);
 
     const onMouseMove = (event: any) => {
         setWidthImage(event.clientX);
         setHeightImage(event.clientY);
-
-        if (count >= 50 && widthImage) {
-            if (peopleImageCount >= 15) {
-                setPeopleImageCount(1)
-            } else {
-                setPeopleImageCount(prevState => prevState + 1)
-            }
-
-            const image = document.createElement('img');
-            image.src = `/assets/images/people-${peopleImageCount}.png`;
-
-            let imageWidth = image.width;
-            let imageHeight = image.height;
-
-            if (!imageWidth && !imageHeight) {
-                imageWidth = 350;
-                imageHeight = 350;
-            }
-
-            image.style.position = `absolute`
-            image.style.top = `${heightImage - imageHeight / 2}px`
-            image.style.left = `${widthImage - imageWidth / 2}px`
-            image.alt = `Человек`;
-
-            // @ts-ignore
-            peopleWrapper.current!.appendChild(image)
-
-            setCount(0);
-        }
     }
 
   return (

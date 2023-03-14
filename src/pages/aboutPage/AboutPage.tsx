@@ -45,11 +45,11 @@ const AboutPage: FC<IPage> = ({
       // @ts-ignore
       aboutImageFifthRef.current!.classList.add('hidden');
     } else if (scrollImageFifthCount < 600 && isAnimateDone) {
-      setScrollImageFirstCount(prevState => prevState + 20);
-      setScrollImageSecondCount(prevState => prevState + 12);
-      setScrollImageThirdCount(prevState => prevState + 20);
-      setScrollImageFourthCount(prevState => prevState + 12);
-      setScrollImageFifthCount(prevState => prevState + 20);
+      setScrollImageFirstCount(prevState => prevState + 30);
+      setScrollImageSecondCount(prevState => prevState + 18);
+      setScrollImageThirdCount(prevState => prevState + 30);
+      setScrollImageFourthCount(prevState => prevState + 18);
+      setScrollImageFifthCount(prevState => prevState + 30);
 
       // @ts-ignore
       aboutImageFirstRef.current!.classList.remove('hidden');
@@ -68,11 +68,11 @@ const AboutPage: FC<IPage> = ({
       }
 
     } else if (!isAnimate) {
-      setScrollImageFirstCount(prevState => prevState - 20);
-      setScrollImageSecondCount(prevState => prevState - 12);
-      setScrollImageThirdCount(prevState => prevState - 20);
-      setScrollImageFourthCount(prevState => prevState - 12);
-      setScrollImageFifthCount(prevState => prevState - 20);
+      setScrollImageFirstCount(prevState => prevState - 30);
+      setScrollImageSecondCount(prevState => prevState - 18);
+      setScrollImageThirdCount(prevState => prevState - 30);
+      setScrollImageFourthCount(prevState => prevState - 18);
+      setScrollImageFifthCount(prevState => prevState - 30);
     }
 
     if ((PageListEnum.MainPage === activeSlideIndex || PageListEnum.ProblemsPage === activeSlideIndex) && isAnimate) {

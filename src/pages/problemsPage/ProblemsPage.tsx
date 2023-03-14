@@ -1,7 +1,7 @@
 import React, {FC, useRef, useState} from 'react';
 import styles from './ProblemsPage.module.scss';
 import classNames from "classnames";
-import {IPage} from "../PageTypes";
+import {IPage, PageListEnum} from "../PageTypes";
 import SolutionPage from "../solutionPage/SolutionPage";
 import NearPage from "../nearPage/NearPage";
 import ConsulsPage from "../consulsPage/ConsulsPage";
@@ -16,7 +16,7 @@ let isConsulsAnimateDone = false;
 let isPlansAnimateDone = false;
 let isVideoAnimateDone = false;
 
-const ProblemsPage: FC<IPage> = ({ isAnimate, setAnimate }) => {
+const ProblemsPage: FC<IPage> = ({ isAnimate, setAnimate, activeSlideIndex }) => {
   const [isTitleRed, setTitleRed] = useState(true);
   const [isSolutionPageVisible, setSolutionPageVisible] = useState(false);
   const [isNearPageVisible, setNearPageVisible] = useState(false);
@@ -44,22 +44,24 @@ const ProblemsPage: FC<IPage> = ({ isAnimate, setAnimate }) => {
   const nearImageRef = useRef(null);
   const nearPageRef = useRef(null);
   const [scrollNearImageCount, setScrollNearImageCount] = useState(1);
-  const [scrollNearImageTranslate, setScrollNearImageTranslate] = useState(1);
+  let [scrollNearImageTranslate, setScrollNearImageTranslate] = useState(1);
 
   const consulsImageRef = useRef(null);
   const consulsPageRef = useRef(null);
   const [scrollConsulsImageCount, setScrollConsulsImageCount] = useState(1);
-  const [scrollConsulsImageTranslate, setScrollConsulsImageTranslate] = useState(1);
+  let [scrollConsulsImageTranslate, setScrollConsulsImageTranslate] = useState(1);
 
   const plansImageRef = useRef(null);
   const plansPageRef = useRef(null);
   const [scrollPlansImageCount, setScrollPlansImageCount] = useState(1);
-  const [scrollPlansImageTranslate, setScrollPlansImageTranslate] = useState(1);
+  let [scrollPlansImageTranslate, setScrollPlansImageTranslate] = useState(1);
 
   const videoImageRef = useRef(null);
   const videoPageRef = useRef(null);
   const [scrollVideoImageCount, setScrollVideoImageCount] = useState(1);
   const [scrollVideoImageTranslate, setScrollVideoImageTranslate] = useState(1);
+
+  const [isAnimateDone, setAnimateDone] = useState(false);
 
   const onWheel = () => {
     // @ts-ignore
@@ -67,213 +69,478 @@ const ProblemsPage: FC<IPage> = ({ isAnimate, setAnimate }) => {
     // @ts-ignore
     const lettersArray = Array.from(letters);
 
-    if (scrollBackgroundCount >= 0) {
-      setScrollBackgroundCount(prevState => prevState - 5);
-      setScrollBackgroundScaleCount(prevState => prevState + 0.025);
+    if (!isAnimateDone) {
 
-      if (scrollBackgroundCount === 10) {
-        setTitleRed(false);
-      }
+      if (scrollBackgroundCount >= 0) {
+        setScrollBackgroundCount(prevState => prevState - 10);
+        setScrollBackgroundScaleCount(prevState => prevState + 0.05);
 
-      // @ts-ignore
-      backgroundRef.current!.style.transform = `translateY(${scrollBackgroundCount}%) scale(${scrollBackgroundScaleCount})`;
-    } else if (scrollFirstBlockCount >= 0) {
-      setScrollFirstBlockCount(prevState => prevState - 10);
-
-      // @ts-ignore
-      firstBlockRef.current!.style.transform = `translateY(${scrollFirstBlockCount}%)`;
-    } else if (scrollSecondBlockCount >= -120) {
-      setScrollFirstBlockCount(prevState => prevState - 10);
-      setScrollSecondBlockCount(prevState => prevState - 10);
-
-      if (scrollSecondBlockCount === -120) {
-        // @ts-ignore
-        firstBlockRef.current!.classList.add('hidden');
-        // @ts-ignore
-        secondBlockRef.current!.classList.add('hidden');
-      }
-
-      // @ts-ignore
-      firstBlockRef.current!.style.transform = `translateY(${scrollFirstBlockCount}%)`;
-      // @ts-ignore
-      secondBlockRef.current!.style.transform = `translateY(${scrollSecondBlockCount}%)`;
-    } else if (scrollSolutionCount >= 0) {
-      setScrollSolutionCount(prevState => prevState - 5);
-      // @ts-ignore
-      const solutionCoordinates = solutionPageRef.current.getBoundingClientRect();
-
-      if (solutionClientX < solutionCoordinates.x) {
-        solutionClientX = solutionCoordinates.x
-      }
-
-      let paddingBetweenTitleAndBorders = parseInt((solutionCoordinates.width - 1450).toFixed(0));
-      let maxValueToStartAnimation = parseInt((solutionClientX - paddingBetweenTitleAndBorders).toFixed(0));
-      let averageValueToAnimation = maxValueToStartAnimation / lettersArray.length;
-
-      if (solutionCoordinates.x < maxValueToStartAnimation) {
-        lettersArray.forEach((letter, index) => {
-          let actualValue = maxValueToStartAnimation - averageValueToAnimation * index+1;
-          let actualValueDouble = actualValue + averageValueToAnimation;
-
-          let rotateLetterValue = 0;
-
-          if (solutionCoordinates.x >= actualValue && solutionCoordinates.x <= actualValueDouble) {
-            rotateLetterValue = 70;
-
-            if (index <= 4) {
-              animateLetterArray.push(lettersArray[12-index]);
-              // @ts-ignore
-              lettersArray[12-index].style.transform = `rotate(-${rotateLetterValue}deg)`
-              // @ts-ignore
-              lettersArray[12-index].style.position = 'absolute';
-              // @ts-ignore
-              lettersArray[12-index].style.top = `${150*index}px`;
-              // @ts-ignore
-              lettersArray[12-index].style.left = '-75px';
-              // @ts-ignore
-              lettersArray[12-index].style.zIndex = '1';
-            }
-          }
-        })
-      }
-
-      animateLetterArray.forEach((item) => {
-        item.style.left = '-75px';
-      })
-
-      // @ts-ignore
-      solutionPageRef.current!.style.transform = `translateX(${scrollSolutionCount}%) rotate(3deg) scale(1.2)`;
-
-      if (scrollSolutionCount === 0) {
-        setSolutionPageVisible(true);
-
-        setTimeout(() => {
-          setPagesAnimateStart(true);
-        }, 3000);
+        if (scrollBackgroundCount === 10) {
+          setTitleRed(false);
+        }
 
         // @ts-ignore
-        solutionPageRef.current!.style.transform = `rotate(0deg) scale(1)`;
-        lettersArray.forEach((item) => {
+        backgroundRef.current!.style.transform = `translateY(${scrollBackgroundCount}%) scale(${scrollBackgroundScaleCount})`;
+      } else if (scrollFirstBlockCount >= 0) {
+        setScrollFirstBlockCount(prevState => prevState - 10);
+
+        // @ts-ignore
+        firstBlockRef.current!.style.transform = `translateY(${scrollFirstBlockCount}%)`;
+      } else if (scrollSecondBlockCount >= -120) {
+        setScrollFirstBlockCount(prevState => prevState - 10);
+        setScrollSecondBlockCount(prevState => prevState - 10);
+
+        if (scrollSecondBlockCount === -120) {
           // @ts-ignore
-          item.style.display = 'none';
+          firstBlockRef.current!.classList.add('hidden');
+          // @ts-ignore
+          secondBlockRef.current!.classList.add('hidden');
+        }
+
+        // @ts-ignore
+        firstBlockRef.current!.style.transform = `translateY(${scrollFirstBlockCount}%)`;
+        // @ts-ignore
+        secondBlockRef.current!.style.transform = `translateY(${scrollSecondBlockCount}%)`;
+      } else if (scrollSolutionCount >= 0) {
+        setScrollSolutionCount(prevState => prevState - 5);
+        // @ts-ignore
+        const solutionCoordinates = solutionPageRef.current.getBoundingClientRect();
+
+        if (solutionClientX < solutionCoordinates.x) {
+          solutionClientX = solutionCoordinates.x
+        }
+
+        let paddingBetweenTitleAndBorders = parseInt((solutionCoordinates.width - 1450).toFixed(0));
+        let maxValueToStartAnimation = parseInt((solutionClientX - paddingBetweenTitleAndBorders).toFixed(0));
+        let averageValueToAnimation = maxValueToStartAnimation / lettersArray.length;
+
+        if (solutionCoordinates.x < maxValueToStartAnimation) {
+          lettersArray.forEach((letter, index) => {
+            let actualValue = maxValueToStartAnimation - averageValueToAnimation * index+1;
+            let actualValueDouble = actualValue + averageValueToAnimation;
+
+            let rotateLetterValue = 0;
+
+            if (solutionCoordinates.x >= actualValue && solutionCoordinates.x <= actualValueDouble) {
+              rotateLetterValue = 70;
+
+              if (index <= 4) {
+                animateLetterArray.push(lettersArray[12-index]);
+                // @ts-ignore
+                lettersArray[12-index].style.transform = `rotate(-${rotateLetterValue}deg)`
+                // @ts-ignore
+                lettersArray[12-index].style.position = 'absolute';
+                // @ts-ignore
+                lettersArray[12-index].style.top = `${150*index}px`;
+                // @ts-ignore
+                lettersArray[12-index].style.left = '-75px';
+                // @ts-ignore
+                lettersArray[12-index].style.zIndex = '1';
+              }
+            }
+          })
+        }
+
+        animateLetterArray.forEach((item) => {
+          item.style.left = '-75px';
         })
+
+        // @ts-ignore
+        solutionPageRef.current!.style.transform = `translateX(${scrollSolutionCount}%) rotate(3deg) scale(1.2)`;
+
+        if (scrollSolutionCount === 0) {
+          setSolutionPageVisible(true);
+
+          setTimeout(() => {
+            setPagesAnimateStart(true);
+          }, 3000);
+
+          // @ts-ignore
+          solutionPageRef.current!.style.transform = `rotate(0deg) scale(1)`;
+          lettersArray.forEach((item) => {
+            // @ts-ignore
+            item.style.display = 'none';
+          })
+        }
+
+      } else if (!isPagesAnimateDone && isPagesAnimateStart) {
+
+        if (scrollNearImageCount <= 3.2 && !isNearPageVisible) {
+          setScrollNearImageCount(prevState => prevState + 0.2);
+          setScrollNearImageTranslate(prevState => prevState + 6);
+
+          if (scrollNearImageTranslate >= 50) {
+            scrollNearImageTranslate = 50;
+          }
+
+          // @ts-ignore
+          nearImageRef.current!.style.transform = `translate(50%, ${scrollNearImageTranslate}%) scale(${scrollNearImageCount})`;
+          // @ts-ignore
+          nearImageRef.current!.style.transition = '.2s all linear';
+        } else if (!isNearPageVisible) {
+          setNearPageVisible(true);
+
+          setTimeout(() => {
+            isNearAnimateDone = true;
+          }, 2000)
+        }
+
+        if (isNearAnimateDone && scrollNearImageTranslate >= 1) {
+          setScrollNearImageCount(prevState => prevState - 0.2);
+          setScrollNearImageTranslate(prevState => prevState - 6);
+
+          if (scrollNearImageTranslate <= 1) {
+            scrollNearImageTranslate = 0;
+          }
+
+          // @ts-ignore
+          nearImageRef.current!.style.transform = `translate(50%, ${scrollNearImageTranslate}%) scale(${scrollNearImageCount})`;
+          // @ts-ignore
+          nearPageRef.current!.classList.remove('active');
+        } else if (isNearAnimateDone && scrollConsulsImageCount <= 4.5 && !isConsulsPageVisible) {
+          setScrollConsulsImageCount(prevState => prevState + 0.2);
+          setScrollConsulsImageTranslate(prevState => prevState + 3);
+
+          if (scrollConsulsImageTranslate >= 50) {
+            scrollConsulsImageTranslate = 50;
+          }
+
+          // @ts-ignore
+          consulsImageRef.current!.style.transform = `translate(${scrollConsulsImageTranslate}%, -${scrollConsulsImageTranslate}%) scale(${scrollConsulsImageCount})`;
+          // @ts-ignore
+          consulsImageRef.current!.style.transition = '.2s all linear';
+          // @ts-ignore
+          consulsImageRef.current!.style.position = 'fixed';
+          // @ts-ignore
+          consulsImageRef.current!.style.top = `${scrollConsulsImageTranslate}%`;
+          // @ts-ignore
+          consulsImageRef.current!.style.right = `${scrollConsulsImageTranslate}%`;
+          // @ts-ignore
+          consulsImageRef.current!.style.zIndex = '3';
+        } else if (!isConsulsPageVisible && isNearAnimateDone) {
+          setConsulsPageVisible(true);
+
+          setTimeout(() => {
+            isConsulsAnimateDone = true;
+          }, 2000)
+        }
+
+        if (isConsulsAnimateDone && scrollConsulsImageCount >= 0.8) {
+          setScrollConsulsImageCount(prevState => prevState - 0.2);
+          setScrollConsulsImageTranslate(prevState => prevState - 3);
+
+          if (scrollConsulsImageTranslate >= 50) {
+            scrollConsulsImageTranslate = 50;
+          }
+
+          if (scrollConsulsImageTranslate <= 1) {
+            scrollConsulsImageTranslate = 0;
+          }
+
+          // @ts-ignore
+          consulsImageRef.current!.style.transform = `translate(${scrollConsulsImageTranslate}%, -${scrollConsulsImageTranslate}%) scale(${scrollConsulsImageCount})`;
+          // @ts-ignore
+          consulsImageRef.current!.style.top = `${scrollConsulsImageTranslate}%`;
+          // @ts-ignore
+          consulsImageRef.current!.style.right = `${scrollConsulsImageTranslate}%`;
+
+          // @ts-ignore
+          consulsPageRef.current!.classList.remove('active');
+        } else if (isConsulsAnimateDone && scrollPlansImageCount <= 4.5 && !isPlansPageVisible) {
+          setScrollPlansImageCount(prevState => prevState + 0.2);
+          setScrollPlansImageTranslate(prevState => prevState + 3);
+
+          if (scrollPlansImageTranslate >= 50) {
+            scrollPlansImageTranslate = 50;
+          }
+
+          // @ts-ignore
+          plansImageRef.current!.style.transform = `translate(${scrollPlansImageTranslate * 3}%, -${scrollPlansImageTranslate}%) scale(${scrollPlansImageCount})`;
+          // @ts-ignore
+          plansImageRef.current!.style.transition = '.2s all linear';
+          // @ts-ignore
+          plansImageRef.current!.style.position = 'fixed';
+          // @ts-ignore
+          plansImageRef.current!.style.top = `${scrollPlansImageTranslate}%`;
+          // @ts-ignore
+          plansImageRef.current!.style.right = `${scrollPlansImageTranslate}%`;
+          // @ts-ignore
+          plansImageRef.current!.style.width = `460px`;
+          // @ts-ignore
+          plansImageRef.current!.style.zIndex = '3';
+
+          // @ts-ignore
+          consulsImageRef.current!.style.zIndex = '2';
+        } else if (isConsulsAnimateDone && !isPlansPageVisible) {
+          setPlansPageVisible(true);
+
+          setTimeout(() => {
+            isPlansAnimateDone = true;
+          }, 2000)
+        }
+
+        if (isPlansAnimateDone && scrollPlansImageCount >= 0.8) {
+          setScrollPlansImageCount(prevState => prevState - 0.2);
+          setScrollPlansImageTranslate(prevState => prevState - 3);
+
+          if (scrollPlansImageTranslate >= 50) {
+            scrollPlansImageTranslate = 50;
+          }
+
+          if (scrollPlansImageTranslate <= 1) {
+            scrollPlansImageTranslate = 0;
+          }
+
+          // @ts-ignore
+          plansImageRef.current!.style.transform = `translate(${scrollPlansImageTranslate * 3}%, -${scrollPlansImageTranslate}%) scale(${scrollPlansImageCount})`;
+          // @ts-ignore
+          plansImageRef.current!.style.top = `${scrollPlansImageTranslate}%`;
+          // @ts-ignore
+          plansImageRef.current!.style.right = `${scrollPlansImageTranslate}%`;
+
+          // @ts-ignore
+          plansPageRef.current!.classList.remove('active');
+        } else if (isPlansAnimateDone && scrollVideoImageCount <= 3.6 && !isVideoPageVisible) {
+          setScrollVideoImageCount(prevState => prevState + 0.2);
+          setScrollVideoImageTranslate(prevState => prevState + 10);
+
+          // @ts-ignore
+          videoImageRef.current!.style.transform = `translate(50%, -${scrollVideoImageTranslate}%) scale(${scrollVideoImageCount})`;
+          // @ts-ignore
+          videoImageRef.current!.style.transition = '.2s all linear';
+          // @ts-ignore
+          videoImageRef.current!.style.zIndex = '3';
+          // @ts-ignore
+          plansImageRef.current!.style.zIndex = '2';
+        } else if (isPlansAnimateDone && !isVideoPageVisible) {
+          setVideoPageVisible(true);
+
+          setTimeout(() => {
+            isVideoAnimateDone = true;
+          }, 2000)
+        }
+
+        if (isVideoAnimateDone && scrollVideoImageCount >= 1) {
+          setScrollVideoImageCount(prevState => prevState - 0.2);
+          setScrollVideoImageTranslate(prevState => prevState - 10);
+
+          // @ts-ignore
+          videoImageRef.current!.style.transform = `translate(50%, -${scrollVideoImageTranslate}%) scale(${scrollVideoImageCount})`;
+          // @ts-ignore
+          videoPageRef.current!.classList.remove('active');
+        } else if (isVideoAnimateDone) {
+          setPagesAnimateDone(true);
+        }
+
+      } else if (isPagesAnimateStart && isPagesAnimateDone && !isAnimate && !isAnimateDone) {
+        setAnimate(true);
       }
 
-    } else if (!isPagesAnimateDone && isPagesAnimateStart) {
+    } else if (isAnimateDone) {
 
-      if (scrollNearImageCount <= 3 && !isNearPageVisible) {
-        setScrollNearImageCount(prevState => prevState + 0.1);
-        setScrollNearImageTranslate(prevState => prevState + 2.5);
+      if (isPagesAnimateDone && isPagesAnimateStart) {
 
-        // @ts-ignore
-        nearImageRef.current!.style.transform = `translate(50%, ${scrollNearImageTranslate}%) scale(${scrollNearImageCount})`;
-        // @ts-ignore
-        nearImageRef.current!.style.transition = '.2s all linear';
-      } else if (!isNearPageVisible) {
-        setNearPageVisible(true);
+        if (scrollVideoImageCount <= 3.6 && isVideoPageVisible) {
+          setScrollVideoImageCount(prevState => prevState + 0.2);
+          setScrollVideoImageTranslate(prevState => prevState + 10);
 
-        setTimeout(() => {
-          isNearAnimateDone = true;
-        }, 4000)
+          // @ts-ignore
+          videoImageRef.current!.style.transform = `translate(50%, -${scrollVideoImageTranslate}%) scale(${scrollVideoImageCount})`;
+          // @ts-ignore
+          videoImageRef.current!.style.transition = '.2s all linear';
+          // @ts-ignore
+          videoImageRef.current!.style.zIndex = '3';
+          // @ts-ignore
+          plansImageRef.current!.style.zIndex = '2';
+        } else if (isPlansAnimateDone && isVideoPageVisible) {
+          setVideoPageVisible(false);
+
+          // @ts-ignore
+          videoPageRef.current!.style.opacity = '1';
+
+          setTimeout(() => {
+            isVideoAnimateDone = false;
+          }, 2000)
+        } else if (!isVideoAnimateDone && scrollVideoImageCount >= 1) {
+          setScrollVideoImageCount(prevState => prevState - 0.2);
+          setScrollVideoImageTranslate(prevState => prevState - 10);
+
+          // @ts-ignore
+          videoImageRef.current!.style.transform = `translate(50%, -${scrollVideoImageTranslate}%) scale(${scrollVideoImageCount})`;
+          // @ts-ignore
+          videoPageRef.current!.style.opacity = '0';
+        }
+
+
+
+        if (!isVideoAnimateDone && scrollVideoImageCount <= 1 && scrollPlansImageCount <= 4.5 && isPlansPageVisible) {
+          setScrollPlansImageCount(prevState => prevState + 0.2);
+          setScrollPlansImageTranslate(prevState => prevState + 3);
+
+          if (scrollPlansImageTranslate >= 50) {
+            scrollPlansImageTranslate = 50;
+          }
+
+          // @ts-ignore
+          plansImageRef.current!.style.transform = `translate(${scrollPlansImageTranslate * 3}%, -${scrollPlansImageTranslate}%) scale(${scrollPlansImageCount})`;
+          // @ts-ignore
+          plansImageRef.current!.style.transition = '.2s all linear';
+          // @ts-ignore
+          plansImageRef.current!.style.position = 'fixed';
+          // @ts-ignore
+          plansImageRef.current!.style.top = `${scrollPlansImageTranslate}%`;
+          // @ts-ignore
+          plansImageRef.current!.style.right = `${scrollPlansImageTranslate}%`;
+          // @ts-ignore
+          plansImageRef.current!.style.width = `460px`;
+          // @ts-ignore
+          plansImageRef.current!.style.zIndex = '3';
+          // @ts-ignore
+          videoImageRef.current!.style.zIndex = '2';
+        } else if (!isVideoAnimateDone && scrollVideoImageCount <= 1 && isPlansPageVisible) {
+          setPlansPageVisible(false);
+
+          // @ts-ignore
+          plansPageRef.current!.style.opacity = '1';
+
+          setTimeout(() => {
+            isPlansAnimateDone = false;
+          }, 2000)
+        } else if (!isPlansAnimateDone && scrollPlansImageCount >= 0.8) {
+          setScrollPlansImageCount(prevState => prevState - 0.2);
+          setScrollPlansImageTranslate(prevState => prevState - 3);
+
+          if (scrollPlansImageTranslate >= 50) {
+            scrollPlansImageTranslate = 50;
+          }
+
+          if (scrollPlansImageTranslate <= 1) {
+            scrollPlansImageTranslate = 0;
+          }
+
+          // @ts-ignore
+          plansImageRef.current!.style.transform = `translate(${scrollPlansImageTranslate * 3}%, -${scrollPlansImageTranslate}%) scale(${scrollPlansImageCount})`;
+          // @ts-ignore
+          plansImageRef.current!.style.top = `${scrollPlansImageTranslate}%`;
+          // @ts-ignore
+          plansImageRef.current!.style.right = `${scrollPlansImageTranslate}%`;
+          // @ts-ignore
+          plansPageRef.current!.style.opacity = '0';
+        }
+
+
+
+        if (!isPlansAnimateDone && scrollPlansImageCount <= 1 && scrollConsulsImageCount <= 4.5 && isConsulsPageVisible) {
+          setScrollConsulsImageCount(prevState => prevState + 0.2);
+          setScrollConsulsImageTranslate(prevState => prevState + 3);
+
+          if (scrollConsulsImageTranslate >= 50) {
+            scrollConsulsImageTranslate = 50;
+          }
+
+          // @ts-ignore
+          consulsImageRef.current!.style.transform = `translate(${scrollConsulsImageTranslate}%, -${scrollConsulsImageTranslate}%) scale(${scrollConsulsImageCount})`;
+          // @ts-ignore
+          consulsImageRef.current!.style.transition = '.2s all linear';
+          // @ts-ignore
+          consulsImageRef.current!.style.position = 'fixed';
+          // @ts-ignore
+          consulsImageRef.current!.style.top = `${scrollConsulsImageTranslate}%`;
+          // @ts-ignore
+          consulsImageRef.current!.style.right = `${scrollConsulsImageTranslate}%`;
+          // @ts-ignore
+          consulsImageRef.current!.style.zIndex = '3';
+          // @ts-ignore
+          plansImageRef.current!.style.zIndex = '2';
+        } else if (!isPlansAnimateDone && scrollPlansImageCount <= 1 && isConsulsPageVisible) {
+          setConsulsPageVisible(false);
+
+          // @ts-ignore
+          consulsPageRef.current!.style.opacity = '1';
+
+          setTimeout(() => {
+            isConsulsAnimateDone = false;
+          }, 2000)
+        } else if (!isConsulsAnimateDone && scrollConsulsImageCount >= 0.8) {
+          setScrollConsulsImageCount(prevState => prevState - 0.2);
+          setScrollConsulsImageTranslate(prevState => prevState - 3);
+
+          if (scrollConsulsImageTranslate >= 50) {
+            scrollConsulsImageTranslate = 50;
+          }
+
+          if (scrollConsulsImageTranslate <= 1) {
+            scrollConsulsImageTranslate = 0;
+          }
+
+          // @ts-ignore
+          consulsImageRef.current!.style.transform = `translate(${scrollConsulsImageTranslate}%, -${scrollConsulsImageTranslate}%) scale(${scrollConsulsImageCount})`;
+          // @ts-ignore
+          consulsImageRef.current!.style.top = `${scrollConsulsImageTranslate}%`;
+          // @ts-ignore
+          consulsImageRef.current!.style.right = `${scrollConsulsImageTranslate}%`;
+          // @ts-ignore
+          consulsPageRef.current!.style.opacity = '0';
+        }
+
+
+
+        if (!isConsulsAnimateDone && scrollConsulsImageCount <= 1 && scrollNearImageCount <= 3.2 && isNearPageVisible) {
+          setScrollNearImageCount(prevState => prevState + 0.2);
+          setScrollNearImageTranslate(prevState => prevState + 6);
+
+          if (scrollNearImageTranslate >= 50) {
+            scrollNearImageTranslate = 50;
+          }
+
+          // @ts-ignore
+          nearImageRef.current!.style.transform = `translate(50%, ${scrollNearImageTranslate}%) scale(${scrollNearImageCount})`;
+          // @ts-ignore
+          nearImageRef.current!.style.transition = '.2s all linear';
+
+          // @ts-ignore
+          nearImageRef.current!.style.zIndex = '3';
+          // @ts-ignore
+          consulsImageRef.current!.style.zIndex = '2';
+        } else if (!isConsulsAnimateDone && scrollConsulsImageCount <= 1 && isNearPageVisible) {
+          setNearPageVisible(false);
+
+          // @ts-ignore
+          nearPageRef.current!.style.opacity = '1';
+
+          setTimeout(() => {
+            isNearAnimateDone = false;
+          }, 2000)
+        } else if (!isNearAnimateDone && scrollNearImageCount >= 1) {
+          setScrollNearImageCount(prevState => prevState - 0.2);
+          setScrollNearImageTranslate(prevState => prevState - 6);
+
+          if (scrollNearImageTranslate <= 1) {
+            scrollNearImageTranslate = 0;
+          }
+
+          // @ts-ignore
+          nearImageRef.current!.style.transform = `translate(50%, ${scrollNearImageTranslate}%) scale(${scrollNearImageCount})`;
+          // @ts-ignore
+          nearPageRef.current!.style.opacity = '0';
+        }
+
       }
 
-      if (isNearAnimateDone && scrollNearImageTranslate >= 1) {
-        setScrollNearImageCount(prevState => prevState - 0.1);
-        setScrollNearImageTranslate(prevState => prevState - 2.5);
-
-        // @ts-ignore
-        nearImageRef.current!.style.transform = `translate(50%, ${scrollNearImageTranslate}%) scale(${scrollNearImageCount})`;
-        // @ts-ignore
-        nearPageRef.current!.classList.remove('active');
-      } else if (isNearAnimateDone && scrollConsulsImageCount <= 4.6 && !isConsulsPageVisible) {
-        setScrollConsulsImageCount(prevState => prevState + 0.1);
-        setScrollConsulsImageTranslate(prevState => prevState + 5);
-
-        // @ts-ignore
-        consulsImageRef.current!.style.transform = `translate(-${scrollConsulsImageTranslate}%, ${scrollConsulsImageTranslate}%) scale(${scrollConsulsImageCount})`;
-        // @ts-ignore
-        consulsImageRef.current!.style.transition = '.2s all linear';
-        // @ts-ignore
-        consulsImageRef.current!.style.zIndex = '3';
-      } else if (!isConsulsPageVisible && isNearAnimateDone) {
-        setConsulsPageVisible(true);
-
-        setTimeout(() => {
-          isConsulsAnimateDone = true;
-        }, 4000)
-      }
-
-      if (isConsulsAnimateDone && scrollConsulsImageCount >= 1) {
-        setScrollConsulsImageCount(prevState => prevState - 0.1);
-        setScrollConsulsImageTranslate(prevState => prevState - 5);
-
-        // @ts-ignore
-        consulsImageRef.current!.style.transform = `translate(-${scrollConsulsImageTranslate}%, ${scrollConsulsImageTranslate}%) scale(${scrollConsulsImageCount})`;
-        // @ts-ignore
-        consulsPageRef.current!.classList.remove('active');
-      } else if (isConsulsAnimateDone && scrollPlansImageCount <= 4.6 && !isPlansPageVisible) {
-        setScrollPlansImageCount(prevState => prevState + 0.1);
-        setScrollPlansImageTranslate(prevState => prevState + 5);
-
-        // @ts-ignore
-        plansImageRef.current!.style.transform = `translate(${scrollPlansImageTranslate}%, ${scrollPlansImageTranslate}%) scale(${scrollPlansImageCount})`;
-        // @ts-ignore
-        plansImageRef.current!.style.transition = '.2s all linear';
-        // @ts-ignore
-        plansImageRef.current!.style.zIndex = '3';
-        // @ts-ignore
-        consulsImageRef.current!.style.zIndex = '2';
-      } else if (isConsulsAnimateDone && !isPlansPageVisible) {
-        setPlansPageVisible(true);
-
-        setTimeout(() => {
-          isPlansAnimateDone = true;
-        }, 4000)
-      }
-
-      if (isPlansAnimateDone && scrollPlansImageCount >= 1) {
-        setScrollPlansImageCount(prevState => prevState - 0.1);
-        setScrollPlansImageTranslate(prevState => prevState - 5);
-
-        // @ts-ignore
-        plansImageRef.current!.style.transform = `translate(${scrollPlansImageTranslate}%, ${scrollPlansImageTranslate}%) scale(${scrollPlansImageCount})`;
-        // @ts-ignore
-        plansPageRef.current!.classList.remove('active');
-      } else if (isPlansAnimateDone && scrollVideoImageCount <= 3.6 && !isVideoPageVisible) {
-        setScrollVideoImageCount(prevState => prevState + 0.1);
-        setScrollVideoImageTranslate(prevState => prevState + 5);
-
-        // @ts-ignore
-        videoImageRef.current!.style.transform = `translate(50%, -${scrollVideoImageTranslate}%) scale(${scrollVideoImageCount})`;
-        // @ts-ignore
-        videoImageRef.current!.style.transition = '.2s all linear';
-        // @ts-ignore
-        videoImageRef.current!.style.zIndex = '3';
-        // @ts-ignore
-        plansImageRef.current!.style.zIndex = '2';
-      } else if (isPlansAnimateDone && !isVideoPageVisible) {
-        setVideoPageVisible(true);
-
-        setTimeout(() => {
-          isVideoAnimateDone = true;
-        }, 4000)
-      }
-
-      if (isVideoAnimateDone && scrollVideoImageCount >= 1) {
-        setScrollVideoImageCount(prevState => prevState - 0.1);
-        setScrollVideoImageTranslate(prevState => prevState - 5);
-
-        // @ts-ignore
-        videoImageRef.current!.style.transform = `translate(50%, -${scrollVideoImageTranslate}%) scale(${scrollVideoImageCount})`;
-        // @ts-ignore
-        videoPageRef.current!.classList.remove('active');
-      } else if (isVideoAnimateDone) {
-        setPagesAnimateDone(true);
-      }
-
-    } else if (isPagesAnimateStart && isPagesAnimateDone) {
-      setAnimate(true);
     }
+
+    if ((PageListEnum.AboutPage === activeSlideIndex || PageListEnum.PeoplePage === activeSlideIndex) && isAnimate) {
+      setTimeout(() => {
+        if (!isPagesAnimateDone) {
+          setAnimateDone(false);
+          setAnimate(false);
+        } else {
+          setAnimateDone(true);
+          setAnimate(false);
+        }
+      }, 2000);
+    }
+
   }
 
   return (
