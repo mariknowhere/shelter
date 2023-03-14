@@ -67,11 +67,13 @@
       letter-spacing: 0.1em;
       text-transform: uppercase;
       transition: 1s all linear;
-      color: white;
+      color: #262626;
 
       div {
         position: absolute;
         transition: .2s all linear;
+        left: -75px;
+        opacity: 0;
       }
     }
   }

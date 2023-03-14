@@ -27,9 +27,7 @@ const PeoplePage: FC<IPage> = ({ isAnimate, setAnimate }) => {
 
             setCount(prevState => prevState+1);
 
-            console.log(widthImage)
-
-            if (count >= 50 && widthImage) {
+            if (count >= 40 && widthImage) {
                 if (peopleImageCount >= 15) {
                     setPeopleImageCount(1)
                 } else {

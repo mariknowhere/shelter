@@ -19,31 +19,27 @@ const SolutionPage: FC<ISolutionPage> = ({
     const [isImageOtherVisible, setImageOtherVisible]= useState(false);
 
     useEffect(() => {
-      if (isAnimate) {
-        if (!isTitleVisible) {
           setTimeout(() => {
-            setTitleVisible(true);
+            setTitleVisible(isAnimate);
           }, 500);
-        }
 
         if (isTitleVisible) {
           setTimeout(() => {
-            setImageFirstVisible(true);
+            setImageFirstVisible(isAnimate);
           }, 500);
         }
 
         if (isImageFirstVisible) {
           setTimeout(() => {
-            setImageSecondVisible(true);
+            setImageSecondVisible(isAnimate);
           }, 500);
         }
 
         if (isImageSecondVisible) {
           setTimeout(() => {
-            setImageOtherVisible(true);
+            setImageOtherVisible(isAnimate);
           }, 500);
         }
-      }
     }, [isAnimate, isImageFirstVisible, isImageSecondVisible, isTitleVisible]);
 
   return (

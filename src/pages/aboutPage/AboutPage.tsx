@@ -62,7 +62,7 @@ const AboutPage: FC<IPage> = ({
       // @ts-ignore
       aboutImageFifthRef.current!.classList.remove('hidden');
 
-      if (scrollImageFifthCount === 580 && isAnimateDone) {
+      if (scrollImageFifthCount === 570 && isAnimateDone) {
         setAnimate(true);
         setAnimateDone(false);
       }
@@ -77,7 +77,7 @@ const AboutPage: FC<IPage> = ({
 
     if ((PageListEnum.MainPage === activeSlideIndex || PageListEnum.ProblemsPage === activeSlideIndex) && isAnimate) {
       setTimeout(() => {
-        if (scrollImageFifthCount >= 580) {
+        if (scrollImageFifthCount >= 570) {
           setAnimateDone(false);
           setAnimate(false);
         } else {

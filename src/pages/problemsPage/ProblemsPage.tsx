@@ -8,7 +8,7 @@ import ConsulsPage from "../consulsPage/ConsulsPage";
 import PlansPage from "../plansPage/PlansPage";
 import VideoPage from "../videoPage/VideoPage";
 
-let solutionClientX = 0;
+let topLetterValue = 200;
 let animateLetterArray: any[] = [];
 
 let isNearAnimateDone = false;
@@ -35,7 +35,7 @@ const ProblemsPage: FC<IPage> = ({ isAnimate, setAnimate, activeSlideIndex }) =>
   const [scrollFirstBlockCount, setScrollFirstBlockCount] = useState(120);
 
   const secondBlockRef = useRef(null);
-  const [scrollSecondBlockCount, setScrollSecondBlockCount] = useState(120);
+  const [scrollSecondBlockCount, setScrollSecondBlockCount] = useState(240);
 
   const solutionPageRef = useRef(null);
   const titleRef = useRef(null);
@@ -81,11 +81,6 @@ const ProblemsPage: FC<IPage> = ({ isAnimate, setAnimate, activeSlideIndex }) =>
 
         // @ts-ignore
         backgroundRef.current!.style.transform = `translateY(${scrollBackgroundCount}%) scale(${scrollBackgroundScaleCount})`;
-      } else if (scrollFirstBlockCount >= 0) {
-        setScrollFirstBlockCount(prevState => prevState - 10);
-
-        // @ts-ignore
-        firstBlockRef.current!.style.transform = `translateY(${scrollFirstBlockCount}%)`;
       } else if (scrollSecondBlockCount >= -120) {
         setScrollFirstBlockCount(prevState => prevState - 10);
         setScrollSecondBlockCount(prevState => prevState - 10);
@@ -103,47 +98,50 @@ const ProblemsPage: FC<IPage> = ({ isAnimate, setAnimate, activeSlideIndex }) =>
         secondBlockRef.current!.style.transform = `translateY(${scrollSecondBlockCount}%)`;
       } else if (scrollSolutionCount >= 0) {
         setScrollSolutionCount(prevState => prevState - 5);
-        // @ts-ignore
-        const solutionCoordinates = solutionPageRef.current.getBoundingClientRect();
 
-        if (solutionClientX < solutionCoordinates.x) {
-          solutionClientX = solutionCoordinates.x
-        }
+          let rotateLetterValue = 70;
 
-        let paddingBetweenTitleAndBorders = parseInt((solutionCoordinates.width - 1450).toFixed(0));
-        let maxValueToStartAnimation = parseInt((solutionClientX - paddingBetweenTitleAndBorders).toFixed(0));
-        let averageValueToAnimation = maxValueToStartAnimation / lettersArray.length;
+          if (scrollSolutionCount === 100) {
+            let index = 11;
 
-        if (solutionCoordinates.x < maxValueToStartAnimation) {
-          lettersArray.forEach((letter, index) => {
-            let actualValue = maxValueToStartAnimation - averageValueToAnimation * index+1;
-            let actualValueDouble = actualValue + averageValueToAnimation;
+            animateLetterArray.push(lettersArray[index]);
+            // @ts-ignore
+            lettersArray[index].style.transform = `rotate(-${rotateLetterValue}deg)`
+            // @ts-ignore
+            lettersArray[index].style.top = `${topLetterValue}px`;
+            // @ts-ignore
+            lettersArray[index].style.opacity = '1';
+          } else if (scrollSolutionCount === 90) {
+            let index = 10;
 
-            let rotateLetterValue = 0;
+            animateLetterArray.push(lettersArray[index]);
+            // @ts-ignore
+            lettersArray[index].style.transform = `rotate(-${rotateLetterValue}deg)`
+            // @ts-ignore
+            lettersArray[index].style.top = `${topLetterValue + 150}px`;
+            // @ts-ignore
+            lettersArray[index].style.opacity = '1';
+          } else if (scrollSolutionCount === 80) {
+            let index = 9;
 
-            if (solutionCoordinates.x >= actualValue && solutionCoordinates.x <= actualValueDouble) {
-              rotateLetterValue = 70;
+            animateLetterArray.push(lettersArray[index]);
+            // @ts-ignore
+            lettersArray[index].style.transform = `rotate(-${rotateLetterValue}deg)`
+            // @ts-ignore
+            lettersArray[index].style.top = `${topLetterValue + 300}px`;
+            // @ts-ignore
+            lettersArray[index].style.opacity = '1';
+          } else if (scrollSolutionCount === 70) {
+            let index = 8;
 
-              if (index <= 4) {
-                animateLetterArray.push(lettersArray[12-index]);
-                // @ts-ignore
-                lettersArray[12-index].style.transform = `rotate(-${rotateLetterValue}deg)`
-                // @ts-ignore
-                lettersArray[12-index].style.position = 'absolute';
-                // @ts-ignore
-                lettersArray[12-index].style.top = `${150*index}px`;
-                // @ts-ignore
-                lettersArray[12-index].style.left = '-75px';
-                // @ts-ignore
-                lettersArray[12-index].style.zIndex = '1';
-              }
-            }
-          })
-        }
-
-        animateLetterArray.forEach((item) => {
-          item.style.left = '-75px';
-        })
+            animateLetterArray.push(lettersArray[index]);
+            // @ts-ignore
+            lettersArray[index].style.transform = `rotate(-${rotateLetterValue}deg)`
+            // @ts-ignore
+            lettersArray[index].style.top = `${topLetterValue + 450}px`;
+            // @ts-ignore
+            lettersArray[index].style.opacity = '1';
+          }
 
         // @ts-ignore
         solutionPageRef.current!.style.transform = `translateX(${scrollSolutionCount}%) rotate(3deg) scale(1.2)`;
@@ -157,9 +155,9 @@ const ProblemsPage: FC<IPage> = ({ isAnimate, setAnimate, activeSlideIndex }) =>
 
           // @ts-ignore
           solutionPageRef.current!.style.transform = `rotate(0deg) scale(1)`;
-          lettersArray.forEach((item) => {
+          animateLetterArray.forEach((item) => {
             // @ts-ignore
-            item.style.display = 'none';
+            item.style.opacity = '0';
           })
         }
 
@@ -177,6 +175,15 @@ const ProblemsPage: FC<IPage> = ({ isAnimate, setAnimate, activeSlideIndex }) =>
           nearImageRef.current!.style.transform = `translate(50%, ${scrollNearImageTranslate}%) scale(${scrollNearImageCount})`;
           // @ts-ignore
           nearImageRef.current!.style.transition = '.2s all linear';
+          // @ts-ignore
+          nearImageRef.current!.style.zIndex = '3';
+
+          // @ts-ignore
+          consulsImageRef.current!.style.zIndex = '2';
+          // @ts-ignore
+          videoImageRef.current!.style.zIndex = '2';
+          // @ts-ignore
+          plansImageRef.current!.style.zIndex = '2';
         } else if (!isNearPageVisible) {
           setNearPageVisible(true);
 
@@ -217,6 +224,13 @@ const ProblemsPage: FC<IPage> = ({ isAnimate, setAnimate, activeSlideIndex }) =>
           consulsImageRef.current!.style.right = `${scrollConsulsImageTranslate}%`;
           // @ts-ignore
           consulsImageRef.current!.style.zIndex = '3';
+
+          // @ts-ignore
+          nearImageRef.current!.style.zIndex = '2';
+          // @ts-ignore
+          videoImageRef.current!.style.zIndex = '2';
+          // @ts-ignore
+          plansImageRef.current!.style.zIndex = '2';
         } else if (!isConsulsPageVisible && isNearAnimateDone) {
           setConsulsPageVisible(true);
 
@@ -270,6 +284,10 @@ const ProblemsPage: FC<IPage> = ({ isAnimate, setAnimate, activeSlideIndex }) =>
           plansImageRef.current!.style.zIndex = '3';
 
           // @ts-ignore
+          nearImageRef.current!.style.zIndex = '2';
+          // @ts-ignore
+          videoImageRef.current!.style.zIndex = '2';
+          // @ts-ignore
           consulsImageRef.current!.style.zIndex = '2';
         } else if (isConsulsAnimateDone && !isPlansPageVisible) {
           setPlansPageVisible(true);
@@ -310,8 +328,13 @@ const ProblemsPage: FC<IPage> = ({ isAnimate, setAnimate, activeSlideIndex }) =>
           videoImageRef.current!.style.transition = '.2s all linear';
           // @ts-ignore
           videoImageRef.current!.style.zIndex = '3';
+
           // @ts-ignore
           plansImageRef.current!.style.zIndex = '2';
+          // @ts-ignore
+          nearImageRef.current!.style.zIndex = '2';
+          // @ts-ignore
+          consulsImageRef.current!.style.zIndex = '2';
         } else if (isPlansAnimateDone && !isVideoPageVisible) {
           setVideoPageVisible(true);
 
@@ -350,8 +373,13 @@ const ProblemsPage: FC<IPage> = ({ isAnimate, setAnimate, activeSlideIndex }) =>
           videoImageRef.current!.style.transition = '.2s all linear';
           // @ts-ignore
           videoImageRef.current!.style.zIndex = '3';
+
           // @ts-ignore
           plansImageRef.current!.style.zIndex = '2';
+          // @ts-ignore
+          nearImageRef.current!.style.zIndex = '2';
+          // @ts-ignore
+          consulsImageRef.current!.style.zIndex = '2';
         } else if (isPlansAnimateDone && isVideoPageVisible) {
           setVideoPageVisible(false);
 
@@ -395,8 +423,13 @@ const ProblemsPage: FC<IPage> = ({ isAnimate, setAnimate, activeSlideIndex }) =>
           plansImageRef.current!.style.width = `460px`;
           // @ts-ignore
           plansImageRef.current!.style.zIndex = '3';
+
           // @ts-ignore
           videoImageRef.current!.style.zIndex = '2';
+          // @ts-ignore
+          nearImageRef.current!.style.zIndex = '2';
+          // @ts-ignore
+          consulsImageRef.current!.style.zIndex = '2';
         } else if (!isVideoAnimateDone && scrollVideoImageCount <= 1 && isPlansPageVisible) {
           setPlansPageVisible(false);
 
@@ -450,8 +483,13 @@ const ProblemsPage: FC<IPage> = ({ isAnimate, setAnimate, activeSlideIndex }) =>
           consulsImageRef.current!.style.right = `${scrollConsulsImageTranslate}%`;
           // @ts-ignore
           consulsImageRef.current!.style.zIndex = '3';
+
           // @ts-ignore
           plansImageRef.current!.style.zIndex = '2';
+          // @ts-ignore
+          nearImageRef.current!.style.zIndex = '2';
+          // @ts-ignore
+          videoImageRef.current!.style.zIndex = '2';
         } else if (!isPlansAnimateDone && scrollPlansImageCount <= 1 && isConsulsPageVisible) {
           setConsulsPageVisible(false);
 
@@ -500,8 +538,13 @@ const ProblemsPage: FC<IPage> = ({ isAnimate, setAnimate, activeSlideIndex }) =>
 
           // @ts-ignore
           nearImageRef.current!.style.zIndex = '3';
+
           // @ts-ignore
           consulsImageRef.current!.style.zIndex = '2';
+          // @ts-ignore
+          videoImageRef.current!.style.zIndex = '2';
+          // @ts-ignore
+          plansImageRef.current!.style.zIndex = '2';
         } else if (!isConsulsAnimateDone && scrollConsulsImageCount <= 1 && isNearPageVisible) {
           setNearPageVisible(false);
 
@@ -523,8 +566,88 @@ const ProblemsPage: FC<IPage> = ({ isAnimate, setAnimate, activeSlideIndex }) =>
           nearImageRef.current!.style.transform = `translate(50%, ${scrollNearImageTranslate}%) scale(${scrollNearImageCount})`;
           // @ts-ignore
           nearPageRef.current!.style.opacity = '0';
+        } else if (!isNearAnimateDone && scrollNearImageCount <= 1) {
+          setPagesAnimateDone(false);
         }
 
+      } else if (!isPagesAnimateDone && scrollSolutionCount <= 115) {
+        setScrollSolutionCount(prevState => prevState + 5);
+
+        if (scrollSolutionCount === 100) {
+          let index = 11;
+
+          animateLetterArray.push(lettersArray[index]);
+          // @ts-ignore
+          lettersArray[index].style.transform = `rotate(0deg)`
+          // @ts-ignore
+          lettersArray[index].style.opacity = '0';
+        } else if (scrollSolutionCount === 90) {
+          let index = 10;
+
+          animateLetterArray.push(lettersArray[index]);
+          // @ts-ignore
+          lettersArray[index].style.transform = `rotate(0deg)`
+          // @ts-ignore
+          lettersArray[index].style.opacity = '0';
+        } else if (scrollSolutionCount === 80) {
+          let index = 9;
+
+          animateLetterArray.push(lettersArray[index]);
+          // @ts-ignore
+          lettersArray[index].style.transform = `rotate(0deg)`
+          // @ts-ignore
+          lettersArray[index].style.opacity = '0';
+        } else if (scrollSolutionCount === 70) {
+          let index = 8;
+
+          animateLetterArray.push(lettersArray[index]);
+          // @ts-ignore
+          lettersArray[index].style.transform = `rotate(0deg)`
+          // @ts-ignore
+          lettersArray[index].style.opacity = '0';
+        }
+
+        // @ts-ignore
+        solutionPageRef.current!.style.transform = `translateX(${scrollSolutionCount}%) rotate(3deg) scale(1.2)`;
+
+        if (scrollSolutionCount === 0) {
+          setSolutionPageVisible(false);
+
+          setTimeout(() => {
+            setPagesAnimateStart(true);
+          }, 3000);
+
+          animateLetterArray.forEach((item) => {
+            // @ts-ignore
+            item.style.opacity = '1';
+          })
+        }
+
+      } else if (scrollFirstBlockCount <= 120) {
+        setScrollFirstBlockCount(prevState => prevState + 10);
+        setScrollSecondBlockCount(prevState => prevState + 10);
+
+        // @ts-ignore
+        firstBlockRef.current!.classList.remove('hidden');
+        // @ts-ignore
+        secondBlockRef.current!.classList.remove('hidden');
+
+        // @ts-ignore
+        firstBlockRef.current!.style.transform = `translateY(${scrollFirstBlockCount}%)`;
+        // @ts-ignore
+        secondBlockRef.current!.style.transform = `translateY(${scrollSecondBlockCount}%)`;
+      } else if (scrollBackgroundCount <= 90) {
+        setScrollBackgroundCount(prevState => prevState + 10);
+        setScrollBackgroundScaleCount(prevState => prevState - 0.05);
+
+        if (scrollBackgroundCount === 10) {
+          setTitleRed(true);
+        }
+
+        // @ts-ignore
+        backgroundRef.current!.style.transform = `translateY(${scrollBackgroundCount}%) scale(${scrollBackgroundScaleCount})`;
+      } else {
+        setAnimate(true);
       }
 
     }
@@ -538,7 +661,7 @@ const ProblemsPage: FC<IPage> = ({ isAnimate, setAnimate, activeSlideIndex }) =>
           setAnimateDone(true);
           setAnimate(false);
         }
-      }, 2000);
+      }, 1000);
     }
 
   }
