@@ -13,6 +13,7 @@
       position: absolute;
       right: 140px;
       top: 0;
+
       opacity: 0;
       transition: .2s all linear;
     }
@@ -21,8 +22,39 @@
       position: absolute;
       bottom: 45px;
       left: 250px;
+
       opacity: 0;
       transition: .2s all linear;
+    }
+
+    &_third {
+      position: absolute;
+      bottom: 0;
+      right: 140px;
+
+      opacity: 0;
+      transition: .2s all linear;
+      transform: translateY(150%);
+    }
+
+    &_fourth {
+      position: absolute;
+      bottom: 0;
+      left: 250px;
+
+      opacity: 0;
+      transition: .2s all linear;
+      transform: translateY(250%);
+    }
+
+    &_fifth {
+      position: absolute;
+      bottom: 0;
+      right: 140px;
+
+      opacity: 0;
+      transition: .2s all linear;
+      transform: translateY(600%);
     }
   }
 

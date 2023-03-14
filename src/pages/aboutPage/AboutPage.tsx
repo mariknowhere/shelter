@@ -3,38 +3,104 @@ import {FC, useEffect, useRef, useState} from "react";
 import {splitText} from "../../utils/splitText";
 import {animateText} from "../../utils/animateText";
 import classNames from "classnames";
-import {IPage} from "../PageTypes";
+import {IPage, PageListEnum} from "../PageTypes";
 
-const AboutPage: FC<IPage> = ({ isAnimate, setAnimate }) => {
+const AboutPage: FC<IPage> = ({
+  isAnimate,
+  setAnimate,
+  isPageVisible,
+  activeSlideIndex
+}) => {
   const [isTitleVisible, setTitleVisible]= useState(false);
   const [isImageVisible, setImageVisible]= useState(false);
   const [isTextVisible, setTextVisible]= useState(false);
   const [isButtonVisible, setButtonVisible]= useState(false);
 
+  const [isAnimateDone, setAnimateDone] = useState(false);
+
   const aboutImageFirstRef = useRef(null);
   const aboutImageSecondRef = useRef(null);
-  const [scrollBlockCount, setScrollBlockCount] = useState(0);
+  const aboutImageThirdRef = useRef(null);
+  const aboutImageFourthRef = useRef(null);
+  const aboutImageFifthRef = useRef(null);
+
+  const [scrollImageFirstCount, setScrollImageFirstCount] = useState(0);
+  const [scrollImageSecondCount, setScrollImageSecondCount] = useState(0);
+  const [scrollImageThirdCount, setScrollImageThirdCount] = useState(150);
+  const [scrollImageFourthCount, setScrollImageFourthCount] = useState(250);
+  const [scrollImageFifthCount, setScrollImageFifthCount] = useState(600);
 
   const onWheel = () => {
-    if (scrollBlockCount === 230) {
+    if (scrollImageFifthCount <= -400 && !isAnimate && !isAnimateDone) {
       setAnimate(true);
 
       // @ts-ignore
       aboutImageFirstRef.current!.classList.add('hidden');
       // @ts-ignore
       aboutImageSecondRef.current!.classList.add('hidden');
-    } else {
-      setScrollBlockCount(prevState => prevState + 10);
+      // @ts-ignore
+      aboutImageThirdRef.current!.classList.add('hidden');
+      // @ts-ignore
+      aboutImageFourthRef.current!.classList.add('hidden');
+      // @ts-ignore
+      aboutImageFifthRef.current!.classList.add('hidden');
+    } else if (scrollImageFifthCount < 600 && isAnimateDone) {
+      setScrollImageFirstCount(prevState => prevState + 20);
+      setScrollImageSecondCount(prevState => prevState + 12);
+      setScrollImageThirdCount(prevState => prevState + 20);
+      setScrollImageFourthCount(prevState => prevState + 12);
+      setScrollImageFifthCount(prevState => prevState + 20);
+
+      // @ts-ignore
+      aboutImageFirstRef.current!.classList.remove('hidden');
+      // @ts-ignore
+      aboutImageSecondRef.current!.classList.remove('hidden');
+      // @ts-ignore
+      aboutImageThirdRef.current!.classList.remove('hidden');
+      // @ts-ignore
+      aboutImageFourthRef.current!.classList.remove('hidden');
+      // @ts-ignore
+      aboutImageFifthRef.current!.classList.remove('hidden');
+
+      if (scrollImageFifthCount === 580 && isAnimateDone) {
+        setAnimate(true);
+        setAnimateDone(false);
+      }
+
+    } else if (!isAnimate) {
+      setScrollImageFirstCount(prevState => prevState - 20);
+      setScrollImageSecondCount(prevState => prevState - 12);
+      setScrollImageThirdCount(prevState => prevState - 20);
+      setScrollImageFourthCount(prevState => prevState - 12);
+      setScrollImageFifthCount(prevState => prevState - 20);
+    }
+
+    if ((PageListEnum.MainPage === activeSlideIndex || PageListEnum.ProblemsPage === activeSlideIndex) && isAnimate) {
+      setTimeout(() => {
+        if (scrollImageFifthCount >= 580) {
+          setAnimateDone(false);
+          setAnimate(false);
+        } else {
+          setAnimateDone(true);
+          setAnimate(false);
+        }
+      }, 2000);
     }
 
     // @ts-ignore
-    aboutImageFirstRef.current!.style.transform = `translateY(-${scrollBlockCount}%)`;
+    aboutImageFirstRef.current!.style.transform = `translateY(${scrollImageFirstCount}%)`;
     // @ts-ignore
-    aboutImageSecondRef.current!.style.transform = `translateY(-${scrollBlockCount}%)`;
+    aboutImageSecondRef.current!.style.transform = `translateY(${scrollImageSecondCount}%)`;
+    // @ts-ignore
+    aboutImageThirdRef.current!.style.transform = `translateY(${scrollImageThirdCount}%)`;
+    // @ts-ignore
+    aboutImageFourthRef.current!.style.transform = `translateY(${scrollImageFourthCount}%)`;
+    // @ts-ignore
+    aboutImageFifthRef.current!.style.transform = `translateY(${scrollImageFifthCount}%)`;
   }
 
   useEffect(() => {
-    if (isAnimate) {
+    if (isPageVisible) {
       if (!isTitleVisible) {
         splitText('data-about-title');
         animateText('data-about-title', 3000);
@@ -62,7 +128,7 @@ const AboutPage: FC<IPage> = ({ isAnimate, setAnimate }) => {
         }, 500);
       }
     }
-  }, [isTitleVisible, isImageVisible, isTextVisible, isAnimate]);
+  }, [isTitleVisible, isImageVisible, isTextVisible, isPageVisible]);
 
   return (
     <div onWheel={onWheel} className={styles['about']}>
@@ -77,6 +143,24 @@ const AboutPage: FC<IPage> = ({ isAnimate, setAnimate }) => {
           alt="О проекте"
           className={classNames(styles['about-image_second'], { 'active': isImageVisible })}
           ref={aboutImageSecondRef}
+      />
+      <img
+        src="/assets/images/about-1.png"
+        alt="О проекте"
+        className={classNames(styles['about-image_third'], { 'active': isImageVisible })}
+        ref={aboutImageThirdRef}
+      />
+      <img
+        src="/assets/images/about-2.png"
+        alt="О проекте"
+        className={classNames(styles['about-image_fourth'], { 'active': isImageVisible })}
+        ref={aboutImageFourthRef}
+      />
+      <img
+        src="/assets/images/about-1.png"
+        alt="О проекте"
+        className={classNames(styles['about-image_fifth'], { 'active': isImageVisible })}
+        ref={aboutImageFifthRef}
       />
       <div className={styles['about-content']}>
         <div className={styles['about-left-panel']}>

@@ -33,7 +33,7 @@ const SupportPage: FC<IPage> = ({
       setScrollBlockCount(prevState => prevState - 4);
     }
 
-    if (PageListEnum.TeamPage === activeSlideIndex && isAnimate) {
+    if ((PageListEnum.TeamPage === activeSlideIndex || PageListEnum.RoadmapPage === activeSlideIndex) && isAnimate) {
       setTimeout(() => {
         if (scrollBlockCount >= 96) {
           setAnimateDone(false);

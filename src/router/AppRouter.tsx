@@ -126,7 +126,12 @@ const AppRouter = () => {
             <MainPage swiper={swiper} />
         </SwiperSlide>
         <SwiperSlide>
-            <AboutPage isAnimate={isAboutPage} setAnimate={setAboutAnimate} />
+            <AboutPage
+              isPageVisible={isAboutPage}
+              isAnimate={isAboutAnimate}
+              setAnimate={setAboutAnimate}
+              activeSlideIndex={activeIndexSlide}
+            />
         </SwiperSlide>
         <SwiperSlide>
             <ProblemsPage isAnimate={isProblemsAnimate} setAnimate={setProblemsAnimate} />

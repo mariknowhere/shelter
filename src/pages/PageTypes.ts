@@ -22,6 +22,7 @@ export interface IPage {
 
 
 export enum PageListEnum {
+    MainPage = 0,
     AboutPage = 1,
     ProblemsPage = 2,
     PeoplePage = 3,

@@ -32,7 +32,7 @@ const RoadmapPage: FC<IPage> = ({
       setScrollBlockCount(prevState => prevState - 3);
     }
 
-    if (PageListEnum.SupportPage === activeSlideIndex && isAnimate) {
+    if ((PageListEnum.SupportPage === activeSlideIndex || PageListEnum.PeoplePage === activeSlideIndex) && isAnimate) {
       setTimeout(() => {
         if (scrollBlockCount >= 57) {
           setAnimateDone(false);
